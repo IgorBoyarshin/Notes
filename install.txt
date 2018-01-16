@@ -1,0 +1,174 @@
+Self-explanatory
+:> pacman -S libreoffice-still
+:> pacman -S jdk8-openjdk
+:> pacman -S powertop
+:> pacman -S htop
+:> pacman -S zip
+:> pacman -S unzip
+:> pacman -S vlc
+:> pacman -S ntfs-3g
+
+
+Change metadata of music files
+:> pacman -S easytag
+
+
+Typing
+:> pacman -S gtypist
+
+
+Replacement of cp
+:> pacman -S rsync
+
+
+Text-based web browser {keywords: webbrowser, web-browser}
+:> pacman -S w3m
+
+
+Keyboard speed
+:> pacman -S xorg-xset
+
+
+Image viewer
+:> pacman -S mirage
+
+
+Wallpaper:
+:> pacman -S feh
+
+
+Screenshots
+:> pacman -S scrot
+
+
+Terminal
+:> pacman -S rxvt-unicode
+Or better yet, to have urxvt image preview support:
+:> trizen -S rxvt-unicode-pixbuf
+
+
+Extention for urxvt for resizing fonts:
+:> trizen -S urxvt-resize-font-git
+
+
+Console battery status check:
+:> pacman -S acpi
+
+
+Ranger
+:> pacman -S ranger
+:> ranger --copy-config=all
+
+
+Quartus:
+Follow Arch wiki
+1) using pacman install packages(regular and lib32)
+2) Download from Altera's website the archive
+3) [Follow wiki]
+4) create script to start
+
+
+PDF:
+:> trizen -S mupdf-git
+:> trizen -S evince-no-gnome
+Vim-like PDF, djvu viewer (investigate. possibly bad behaviour)
+:> pacman -S apvlv
+
+
+Music (Audio)
+:> pacman -S alsa-utils
+(Note: Need pulseaudio???)
+:> pacman -S pulseaudio
+:> trizen -S mpd-git ncmpcpp-git mpc
+Then add this to the startup script:
+:> [ ! -s ~/.config/mpd/pid ] && mpd
+(Note: mpd should not be started with systemctl, just run as 'mpd')
+Regular good simple player:
+:> pacman -S deadbeef
+
+
+C#:
+:> pacman -S mono
+
+
+Torrent:
+:> pacman -S qbittorrent
+
+
+Wine
+:> pacman -S wine
+For .NET apps:
+:> pacman -S wine-mono
+For IE:
+:> pacman -S wine_gecko
+
+
+XMobar {keywords: xmobar}
+Your choice(no problems, no additional steps):
+(Note: executable is ~/.local/bin/xmobar)
+:> stack install --flag xmobar:with_xft xmobar
+Or the regular one(note: has issues, crashes):
+:> pacman -S xmobar
+Or this one, for audio support:
+:> trizen -S haskell-alsa-core haskell-alsa-mixer
+    Now we have to compile xmobar with alsa support
+    Edit the package build during the following command(add 'with_alsa' into flags):
+:> trizen -S xmobar-git
+
+
+Font
+Install powerline fonts from https://github.com/powerline/fonts
+:> trizen -S ttf-consolas-powerline
+For special glyphs:
+:> pacman -S ttf-freefont
+
+
+Install oh-my-zsh
+Don't forget to correct the .zshrc
+Don't forget to put .dircolors into home
+
+
+For tmux install TMP(plugin manager) from github
+
+
+For universal copy-paste buffer
+:> pacman -S xclip
+(Note: see about possible bug in info.txt)
+
+
+Latex
+:> sudo pacman -S texlive-most
+:> trizen -S wiki2beamer
+Pandoc
+:> stack install --system-ghc pandoc
+
+
+Stack(static): [following the Arch wiki for Haskell]
+:> trizen --m-arg --skipchecksum --m-arg --skuppgpcheck -Sb stack-static
+:> stack setup --system-ghc
+:> stack install --system-ghc cabal-install
+
+
+Haskell for Vim
+vimproc:
+If encounter an .so DLL error => inside Vim run 'VimProcInstall'
+ghc-mod:
+:> stack install ghc-mod
+
+
+-------------------------------------------------------------------------------
+
+
+Not to forget
+pywal - draw colors from background image
+rofi - instead of dmenu
+
+
+Full system update
+:> pacman -Syu
+:> trizen -Syu
+
+
+Get the list of all installed packages
+:> pacman -Qe
+:> yapurt -Qe

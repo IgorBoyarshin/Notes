@@ -1,0 +1,30 @@
+Super: `
+All commands are preceded with Super.
+
+
+Windows(tabs):
+c - create new
+n - next
+p - previous
+, - rename
+& - kill
+
+
+Panes(splits):
+x - kill pane
+} - move current pane right
+{ - move current pane left
+z - zoom in
+
+
+General:
+d - detach from session
+t - big clock
+
+
+Swap windows 3 and 1:
+<Super + :> swap-window -s 3 -t 1
+
+
+Move window to a different number(2):
+<Super + :> move-window -t 2

@@ -1,0 +1,253 @@
+ZIP archive {keywords: zip, Zip}
+To compress:
+:> zip squash.zip file1 file2 file3
+or to zip a directory
+:> zip -r squash.zip dir1
+To uncompress:
+:> unzip squash.zip
+
+
+Unarchive RAR with unrar {keywords: rar, Rar, unrar}
+To unarchive:
+:> unrar x <name>
+To list:
+:> unrar l <name>
+
+
+Sort yaourt packages based on their rating
+:> yaourt -Ss package --sort w
+
+
+Powerdown
+[-P(default) == powerdown, -r == reboot]
+:> shutdown -P +60 [min]
+:> shutdown -P 1:00 [1 AM]
+:> shutdown -P now
+:> shutdown -c [cancel]
+
+
+Brightness
+[sys/class/backlight/intel_backlight]
+max_brightness - const, max possible value
+actual_brightness - readonly, current value(watches the 'brightness' file)
+brightness - set by user, current value
+:> sudo chmod a+rw brightness
+:> echo "1000" > brightness
+
+
+Search the filesystem
+:> grep -rnw 'PATH' -e 'PATTERN'
+-R === traverse the whole tree, follow symlinks
+-r === traverse the whole tree, dont' follow symlinks
+-n === show line numbers
+-w === match the whole word
+-l === don't show the matches, just file names
+--include=\*.{c,h}
+--exclude=*.o
+--exclude-dir={dir1,dir2,*.dst}
+
+
+Default copy
+:> cp -a source/. dest/
+The -a option is an improved recursive option, that preserve all file attributes, and also preserve symlinks.
+The . at end of the source path is a specific cp syntax that allow to copy all files and folders, included hidden ones.
+
+
+Copy comparison
+- Using cp(the following two are equivalent):
+:> cp -a source/. dest/source
+:> cp -a source dest
+- Using rsync(the following two are equivalent):
+:> rsync -avh --progress source/ dest/source
+:> rsync -avh --progress source dest
+
+
+Execute visual stuff with sudo(as root)
+:> xhost +local:
+
+
+To run (n)vim as sudo and properly load the .vimrc
+:> sudo -E nvim ...
+
+
+List devices, partitions
+:> lsblk
+
+
+When errors arise from yaourt due to gpg(pgp) check fail
+:> yaourt --m-arg --skipchecksums --m-arg --skippgpcheck -Sb <package>
+For trizen:
+:> trizen --skipinteg <operations>
+
+
+For ext4 format, in fstab, don't set uid and gid(it even won't allow you),
+set them through directory parameters(chmod, chown)
+
+
+Terminal font
+Source Code Pro for Powerline Regular -- 9
+
+
+To mount an SD card
+:> mount -t vfat /dev/mmcblk0p1 /mount/path
+
+
+Additional format types
+VFAT(vfat), MSDOS(msdos):
+:> pacman -S dosfstools
+NTFS(ntfs):
+:> pacman -S ntfsprogs
+
+
+Create a bootable usb(or just transfer an iso to a usb) with dd:
+:> sudo dd bs=4M if=/home/igorek/file.iso of=/dev/sdb status=progress oflag=sync
+
+
+PowerTop custom service at:
+/etc/systemd/system/powertop-custom.service
+Script at:
+/usr/local/sbin/powertop-custom.sh
+
+
+About default target(Display manager related):
+https://bbs.archlinux.org/viewtopic.php?id=215694
+
+
+Mounting options, permissions table
+    0   1   2   3   4   5   6   7
+r   +   +   +   +   -   -   -   -
+w   +   +   -   -   +   +   -   -
+x   +   -   +   -   +   -   +   -
+(owner, group, other)
+umask - everything
+dmask - directories
+fmask - files
+
+
+Timestamps
+atime - access time
+ctime - change time (+attributes)
+mtime - modification time(-attributes)
+
+
+Mounting external USB
+1) :> mkdir /mnt/External
+2) make yourself(and your group) the owner with chown
+3) allow all permissions with chmod
+4) when mounting, use smth like(specify both uid and gid):
+:> sudo mount -o uid=igorek,gid=users,fmask=111,dmask=000 /dev/sdb1 /mnt/External
+
+
+Stack install with flag
+:> stack install --flag xmobar:with_xft xmobar
+
+
+Info about keybindings:
+:> loadkeys
+:> showkey
+
+
+Pipes
+Create:
+:> mkfifo <name>
+Remove:
+:> rm <name>
+
+
+Execute an action on file change
+(<name> - file ame to watch. <action> - command-line action to perform)
+:> pacman -S inotify-tools
+:> while [[ 1 ]]; do inotifywait -e modify <name>; <action>; done
+
+
+Create a link
+:> ln -s -T TARGET LINK_NAME
+
+
+Find and connect to a new Wifi
+(Note: After system installation: disable dhcpcd and netctl, enable NetworkManager)
+Search:
+:> nmcli device wifi
+Connect:
+:> nmcli device wifi connect <SSID> password <PASSWORD>
+
+
+Git credentials
+At home location:
+:> git config --global credential.helper store
+At the next promt git will remember the credentials and store then in the home folder
+
+
+URXVT image preview support
+The image preview methods urxvt and urxvt_full can be used with the urxvt terminal and are typically more reliable. They use a special escape sequence to change the background of the terminal in order to render the image.
+Steps:
+* Run urxvt with pixbuf support (some operating systems ship it without pixbuf support, but for example ArchLinux has an AUR package called rxvt-unicode-pixbuf which should work)
+* Add the line set preview_images true to your ~/.config/ranger/rc.conf.
+* Add the line set preview_images_method urxvt to your ~/.config/ranger/rc.conf. You can also choose urxvt-full if you would like the image to fill the whole terminal rather than just the preview pane.
+* Restart ranger
+
+
+Reload resources
+:> xrdb ~/.Xresources
+(for example, to reload XMobar settings in real time)
+
+
+Startup script for LightDM
+LightDM has a script /etc/lightdm/lightdm/Xsession which(at the end) calls a
+user-defined script ~/.xsession
+
+
+Keyboard speed {keywords: keyboard}
+:> pacman -S xorg-xset
+Temporary(not recommended. But seems to work OK if places inside the init script):
+:> xset r rate 200 35
+Permanently(hmmm... the above seems just fine if placed inside the init script):
+{/etc/X11/xorg.conf.d/00-keyboard.conf}
+Option "AutoRepeat" "delay rate"
+
+
+Language
+Temporary:
+setxkbmap -model pc104 -layout us,ru -variant , -option grp:alt_shift_toggle
+Permanently:
+localectl --no-convert set-x11-keymap us,ru pc104 , grp:alt_shift_toggle
+
+
+Wallpaper
+Into .xsession:
+:> feh --bg-center <path-to-wallpaper>
+
+
+Console battery status check:
+:> acpi -i
+
+
+XMonad example: {keywords: xmonad}
+https://habrahabr.ru/post/242351/
+
+
+Generate assembly code with gcc
+:> gcc source.c -O0 -masm=intel -S -o source.s
+
+
+For Agnoster theme for zsh, to remove the hostname:
+In *_context function, change the following to:
+prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+
+
+Install Plug for neovim
+Investigate:
+Need to put plug.vim(located in ~/.local/share/nvim/site/autoload) into ~/.vim/autoload
+
+
+Add dotfiles/.vim/snippets into ~/.vim
+
+
+Possible fix if xclip stops working, complaining about a missing DISPLAY:
+Remove(backup) the .Xauthority file at home. At the next start a new one(fixed?) will be generated. And at the one more consequent start everything will work.
+
+
+Git, list all untracket files
+:> git status -u
+
+

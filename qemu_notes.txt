@@ -1,0 +1,6 @@
+qemu-img create -f qcow2 qemu_image 16G
+qemu-system-x86_64 -smp 2 -m 1G -enable-kvm -cdrom ubuntu-17.04.iso -boot order=d qemu_tst1
+
+qemu-system-x86_64 -cdrom winxp.iso -smp 2 -m 2048 -enable-kvm -drive file=win,format=raw -cpu host -usbdevice tablet -vga std -soundhw hda
+
+qemu-system-x86_64 -smp 4 -m 1.5G -enable-kvm -drive file=winxp,format=raw -cpu host -usb -usbdevice tablet -vga std -soundhw hda
