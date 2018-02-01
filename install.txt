@@ -6,6 +6,7 @@ Self-explanatory
 :> pacman -S zip
 :> pacman -S unzip
 :> pacman -S vlc
+(Note: for gui in vlc also install "qt4")
 :> pacman -S ntfs-3g
 
 
@@ -29,6 +30,10 @@ Keyboard speed
 :> pacman -S xorg-xset
 
 
+Print system information with ASCII symbols
+:> pacman -S screenfetch
+
+
 Image viewer
 :> pacman -S mirage
 
@@ -41,9 +46,15 @@ Screenshots
 :> pacman -S scrot
 
 
+Grub, dual boot, windows
+:> pacman -S os-prober
+
+
 Terminal
 :> pacman -S rxvt-unicode
 Or better yet, to have urxvt image preview support:
+(Note: somewhy slow(~0.5s) rendering time. Since w3m is good and fast, don't
+need to use urxvt for rendering images).
 :> trizen -S rxvt-unicode-pixbuf
 
 
@@ -103,20 +114,64 @@ For IE:
 :> pacman -S wine_gecko
 
 
-XMobar {keywords: xmobar}
-Your choice(no problems, no additional steps):
-(Note: executable is ~/.local/bin/xmobar)
-:> stack install --flag xmobar:with_xft xmobar
-Or the regular one(note: has issues, crashes):
-:> pacman -S xmobar
-Or this one, for audio support:
-:> trizen -S haskell-alsa-core haskell-alsa-mixer
-    Now we have to compile xmobar with alsa support
-    Edit the package build during the following command(add 'with_alsa' into flags):
-:> trizen -S xmobar-git
+Haskell, Xmonad and Xmobar, ghc-mod
+[
+    Haskell:           https://wiki.archlinux.org/index.php/Haskell
+    Xmonad and Xmobar: http://brianbuccola.com/how-to-install-xmonad-and-xmobar-via-stack/
+]
+Haskell:
+(Note: flag "--system-ghc" ??)
+    :> trizen -S stack-bin
+    :> stack setup --system-ghc
+    :> stack install --system-ghc cabal-install
+Xmonad and Xmobar:
+    :> cd ~/.xmonad
+    :> git clone "https://github.com/xmonad/xmonad" xmonad-git
+    :> git clone "https://github.com/xmonad/xmonad-contrib" xmonad-contrib-git
+    :> git clone "https://github.com/jaor/xmobar" xmobar-git
+    :> stack init
+    :> vim stack.yaml
+    {
+    ...
+    flags:
+        xmobar:
+            with_xft: true
+    ...
+    }
+    :> stack install
+    :> vim build
+    {
+    #!/bin/sh
+    exec stack ghc -- \
+      --make xmonad.hs \
+      -i \
+      -ilib \
+      -fforce-recomp \
+      -main-is main \
+      -v0 \
+      -o "$1"
+    }
+    :> chmod a+x build
+    Every time you update the three downloaded repositories:
+    :> stack install
+    May first need to do:
+    :> stack clean
+ghc-mod:
+    :> stack install ghc-mod
+cabal-install:
+    :> stack install cabal-install
+The old ways, just for the sake of history, not used:
+    (Note: executable is ~/.local/bin/xmobar)
+    :> stack install --flag xmobar:with_xft xmobar
+    Or this one, for audio support:
+    :> trizen -S haskell-alsa-core haskell-alsa-mixer
+        Now we have to compile xmobar with alsa support
+        Edit the package build during the following command(add 'with_alsa' into flags):
+    :> trizen -S xmobar-git
 
 
 Font
+TODO
 Install powerline fonts from https://github.com/powerline/fonts
 :> trizen -S ttf-consolas-powerline
 For special glyphs:

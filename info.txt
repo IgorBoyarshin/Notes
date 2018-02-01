@@ -1,10 +1,12 @@
 ZIP archive {keywords: zip, Zip}
 To compress:
-:> zip squash.zip file1 file2 file3
+:> zip archive.zip file1 file2 file3
 or to zip a directory
-:> zip -r squash.zip dir1
+:> zip -r archive.zip dir1
 To uncompress:
-:> unzip squash.zip
+:> unzip archive.zip
+To uncompress into given path:
+:> unzip archive.zip -d ~/folder_to_put_into
 
 
 Unarchive RAR with unrar {keywords: rar, Rar, unrar}
@@ -84,10 +86,6 @@ For ext4 format, in fstab, don't set uid and gid(it even won't allow you),
 set them through directory parameters(chmod, chown)
 
 
-Terminal font
-Source Code Pro for Powerline Regular -- 9
-
-
 To mount an SD card
 :> mount -t vfat /dev/mmcblk0p1 /mount/path
 
@@ -101,6 +99,48 @@ NTFS(ntfs):
 
 Create a bootable usb(or just transfer an iso to a usb) with dd:
 :> sudo dd bs=4M if=/home/igorek/file.iso of=/dev/sdb status=progress oflag=sync
+
+
+Font
+In order to add new fonts:
+1) place the folder containing a font family inside
+    [/usr/share/fonts] === for all users
+    [/.local/share/fonts] === for current user
+    Make sure the folder and files in it can be read by everybody.
+2) Make the system search for fonts in that location
+    (Note: the name of the file doesn't matter, just make it {digit}{digit}-*.conf).
+    [/etc/X11/xorg.conf.d/10-fonts.conf]
+    "
+        # Let X.Org know about the custom font directories
+        Section "Files"
+            FontPath    "/usr/share/fonts/100dpi"
+            FontPath    "/usr/share/fonts/75dpi"
+            FontPath    "/usr/share/fonts/consolas-powerline"
+            FontPath    "/usr/share/fonts/cantarell"
+            FontPath    "/usr/share/fonts/cyrillic"
+            FontPath    "/usr/share/fonts/encodings"
+            FontPath    "/usr/share/fonts/gsfonts"
+            FontPath    "/usr/share/fonts/Inconsolata"
+            FontPath    "/usr/share/fonts/FiraCode"
+            FontPath    "/usr/share/fonts/SourceCodePro"
+            FontPath    "/usr/share/fonts/InconsolataGo"
+            FontPath    "/usr/share/fonts/misc"
+            FontPath    "/usr/share/fonts/Mononoki"
+            FontPath    "/usr/share/fonts/OTF"
+            FontPath    "/usr/share/fonts/TTF"
+            FontPath    "/usr/share/fonts/Type1"
+            FontPath    "/usr/share/fonts/util"
+        EndSection
+    "
+(Note: the contents of the file must correspond to dirs in the "fonts" folder).
+3) Update the font cache(most likely an unnecessary step)
+    :> fc-cache
+4) Find out the name of the font
+    :> fc-list
+    (Note: output to a file and do a search)
+5) In .Xresources set the font by its name
+6) Reload .Xresources
+    :> xrdb ~/.Xresources
 
 
 PowerTop custom service at:
@@ -138,7 +178,7 @@ Mounting external USB
 :> sudo mount -o uid=igorek,gid=users,fmask=111,dmask=000 /dev/sdb1 /mnt/External
 
 
-Stack install with flag
+Stack install with flag example
 :> stack install --flag xmobar:with_xft xmobar
 
 
@@ -199,11 +239,13 @@ user-defined script ~/.xsession
 
 Keyboard speed {keywords: keyboard}
 :> pacman -S xorg-xset
-Temporary(not recommended. But seems to work OK if places inside the init script):
-:> xset r rate 200 35
-Permanently(hmmm... the above seems just fine if placed inside the init script):
-{/etc/X11/xorg.conf.d/00-keyboard.conf}
-Option "AutoRepeat" "delay rate"
+Temporary(not recommended, as it may be reset sometimes by something):
+:> xset r rate 200 40
+Permanently [~/.xserverrc]:
+exec /usr/bin/Xorg -nolisten tcp -ardelay 250 -arinterval 25 "$@" vt$XDG_VTNR
+(Note: The second argument, namely 25, uses delay, whereas xset uses frequency.
+So, for example, xset r rate 250 40 === ... -ardelay 250 -arinterval 25
+(because 1/25ms = 40Hz).)
 
 
 Language
@@ -220,10 +262,6 @@ Into .xsession:
 
 Console battery status check:
 :> acpi -i
-
-
-XMonad example: {keywords: xmonad}
-https://habrahabr.ru/post/242351/
 
 
 Generate assembly code with gcc
@@ -243,6 +281,10 @@ Need to put plug.vim(located in ~/.local/share/nvim/site/autoload) into ~/.vim/a
 Add dotfiles/.vim/snippets into ~/.vim
 
 
+Altera Quartus start command
+:> /opt/altera/quartus/bin/quartus --64bit
+
+
 Possible fix if xclip stops working, complaining about a missing DISPLAY:
 Remove(backup) the .Xauthority file at home. At the next start a new one(fixed?) will be generated. And at the one more consequent start everything will work.
 
@@ -251,3 +293,18 @@ Git, list all untracket files
 :> git status -u
 
 
+In order to make grub discover Windows {keywords: Grub, dual boot, windows}
+Install os-prober. Nothing else required. On the next grub-mkconfig it should
+find and add menuentry for windows.
+
+
+MIME types list for extensions
+https://en.wikipedia.org/wiki/Media_type
+
+
+Xmonad recompile
+:> xmonad --recompile
+
+
+Print character by its code
+:> echo $'\ue621'

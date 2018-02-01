@@ -1,0 +1,3 @@
+While searching, add:
+\c === to ignore case
+\C === make case sensitive
