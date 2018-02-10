@@ -10,6 +10,10 @@ Self-explanatory
 :> pacman -S ntfs-3g
 
 
+Disassembler(debugger), similar to OllyDbg
+:> trizen -S edb-debugger
+
+
 Change metadata of music files
 :> pacman -S easytag
 

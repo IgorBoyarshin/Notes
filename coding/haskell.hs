@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
-    ---------------- Main file example
+---------------- Main file example
 -------------------------------------------------------------------------------
 -- import Data.List
 -- import System.IO
@@ -23,7 +23,7 @@
 main :: IO ()
 main = return ()
 -------------------------------------------------------------------------------
-    ---------------- Parallel computations test
+---------------- Parallel computations test
 -------------------------------------------------------------------------------
 import Control.Parallel
 import Control.Monad
@@ -48,14 +48,90 @@ main :: IO ()
 main = forM_ [0..45] $ \i ->
             printf "n=%d => %d\n" i (fib i)
 -------------------------------------------------------------------------------
-    ---------------- Disable warnings(errors)
+---------------- General notes
+-------------------------------------------------------------------------------
+Compile with Stack:
+:> stack exec -- ghc Main.hs -o Main
+
+Run without compiling:
+:> stack exec -- runghc Main.hs
+
+
+Compile for parallel:
+:> stack exec -- ghc -O2 -threaded --make parallel-test.hs
+
+Run for parallel(4 threads):
+:> ./Main +RTS +N4
+
+
+Print the value of an expression without causing it to be evaluated:
+:sprint x
+
+seq:
+evaluate its first argument(to weak head normal form(WHNF) === first-level constructor), return second argument
+
+
+Clear screen in Prelude:
+:! run the shell command
+:! cls under windows
+:! clear under linux and OS X
+-------------------------------------------------------------------------------
+---------------- Disable warnings(errors)
 -------------------------------------------------------------------------------
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
--- https://downloads.haskell.org/~ghc/7.8.2/docs/html/users_guide/flag-reference.html
+Other flags:
+https://downloads.haskell.org/~ghc/7.8.2/docs/html/users_guide/flag-reference.html
 -------------------------------------------------------------------------------
+---------------- Random stuff
+-------------------------------------------------------------------------------
+Kleisli operator:
+(>=>) :: (a -> m b) -> (b -> m c) -> (a -> m c)
+f >=> g = \a -> let mb = f a
+                 in mb >>= g
+
+Bind operator:
+(>>=) :: m a -> (a -> m b) -> m b
+ma >>= f = join (fmap f ma)
+
+Join operator:
+join :: m (m a) -> m a -- flattens
 
 
+class Monad m where
+    (>>=) :: m a -> (a -> m b) -> m b
+    return :: a -> m a -- lifts
 
+class Functor m => Monad m where
+    join :: m (m a) -> m a
+    return :: a -> m a
+
+
+Maybe Monad:
+1) One solution
+    f :: a -> Maybe b
+    Mothing >>= f = Nothing
+    Just a >>= f = f a
+2) Second solution
+    join :: m (m a) -> m a
+    join Just (Just a) = Just a
+    join _ = Nothing
+
+
+fmap :: Functor f => (a -> b) -> f a -> f b
+-- Lifts a function
+
+
+Lifting
+Variable:
+return :: a -> m a
+Function:
+fmap :: (a -> b) -> f a -> f b
+
+
+(<-) operator unwraps the content. The embellishment(state) is carried through the do block, it does not disappear
+-------------------------------------------------------------------------------
+---------------- Random stuff 2
+-------------------------------------------------------------------------------
 type Writer a = (a, String)
 
 (>=>) :: (a -> Writer b) -> (b -> Writer c) ->  (a -> Writer c)

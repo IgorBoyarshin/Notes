@@ -200,7 +200,7 @@ Execute an action on file change
 :> while [[ 1 ]]; do inotifywait -e modify <name>; <action>; done
 
 
-Create a link
+Create a symbolic link(symlink)
 :> ln -s -T TARGET LINK_NAME
 
 
@@ -215,7 +215,7 @@ Connect:
 Git credentials
 At home location:
 :> git config --global credential.helper store
-At the next promt git will remember the credentials and store then in the home folder
+At the next promt git will remember the credentials and store them in the home folder
 
 
 URXVT image preview support
@@ -308,3 +308,7 @@ Xmonad recompile
 
 Print character by its code
 :> echo $'\ue621'
+
+
+To find the class name of an application(click on thr app)
+:> xprop | grep WM_CLASS
