@@ -8,6 +8,44 @@ Self-explanatory
 :> pacman -S vlc
 (Note: for gui in vlc also install "qt4")
 :> pacman -S ntfs-3g
+:> pacman -S gcc-ada
+:> pacman -S openmpi
+
+
+Music:
+:> pacman -S cmus
+
+
+Steam Locomotive
+:> pacman -S sl
+
+
+:> trizen -S downgrader
+
+
+VMWare
+[follow the wiki to enable services and run modprobe]
+:> trizen -S vmware-workstation
+To fix networking(may require preceding reboot):
+:> sudo vmware-networks --start
+
+
+Terminal(console) games
+:> trizen -S nsnake
+
+
+Times New Romans and the company fonts
+:> trizen -S ttf-ms-fonts
+
+
+R, Markdown
+:> pacman -S r
+:> pacman -S tk
+:> stack install pandoc [long]
+:> pacman -S gcc-fortran [Needed??]
+Install internal packages:
+:> sudo R
+    > install.packages("rmarkdown")
 
 
 Disassembler(debugger), similar to OllyDbg
@@ -86,6 +124,8 @@ Follow Arch wiki
 PDF:
 :> trizen -S mupdf-git
 :> trizen -S evince-no-gnome
+DJVU:
+:> pacman -S djview
 Vim-like PDF, djvu viewer (investigate. possibly bad behaviour)
 :> pacman -S apvlv
 
