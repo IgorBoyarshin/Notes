@@ -336,6 +336,9 @@ OR(newer):
 Get disk space(used, left etc)
 :> df -ah
 
+Get folder (directory) size
+:> du -sh
+
 
 To temporarily give more space for /tmp folder
 :> sudo mount -o remount,size=4G,noatime /tmp
