@@ -33,8 +33,8 @@ Brightness
 max_brightness - const, max possible value
 actual_brightness - readonly, current value(watches the 'brightness' file)
 brightness - set by user, current value
-:> sudo chmod a+w sys/class/backlight/intel_backlight/brightness
-:> echo "1000" > sys/class/backlight/intel_backlight/brightness
+:> sudo chmod a+w /sys/class/backlight/intel_backlight/brightness
+:> echo "1000" > /sys/class/backlight/intel_backlight/brightness
 
 
 Search the filesystem
@@ -395,3 +395,9 @@ KERNEL=="lp[0-9]", SYMLINK+="%k", GROUP="lp"
 
 If the clock got set wrongly because of windows, in order to revert it(from archwiki Time)
 :> timedatectl set-local-rtc 0
+
+
+Format
+:> mkfs.ntfs /dev/sdb1
+Quick format:
+:> mkfs.ntfs /dev/sdb1 -Q

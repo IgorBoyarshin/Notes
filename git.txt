@@ -87,3 +87,13 @@ git config --global credential.helper cache
 git log --oneline --decorate --graph --all
 
 git clone <url>
+
+-------------------------------------------------------------------------------
+Fix wrong commit message
+:> git commit --amend
+
+
+Undo commit
+:> git reset HEAD~
+:> ...
+:> git commit -c ORIG_HEAD
