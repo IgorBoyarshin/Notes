@@ -10,6 +10,14 @@ Self-explanatory
 :> pacman -S ntfs-3g
 :> pacman -S gcc-ada
 :> pacman -S openmpi
+:> pacman -S krita
+
+
+:> expac -S '%r/%n: %D' pacman
+
+
+Assembly
+:> pacman -S nasm
 
 
 Music:
@@ -134,12 +142,11 @@ Music (Audio)
 :> pacman -S alsa-utils
 (Note: Need pulseaudio???)
 :> pacman -S pulseaudio
-:> trizen -S mpd-git ncmpcpp-git mpc
+:> trizen -S ncmpcpp-git mpc
+:> pacman -S mpd
 Then add this to the startup script:
 :> [ ! -s ~/.config/mpd/pid ] && mpd
 (Note: mpd should not be started with systemctl, just run as 'mpd')
-Regular good simple player:
-:> pacman -S deadbeef
 
 
 C#:
@@ -254,6 +261,9 @@ If encounter an .so DLL error => inside Vim run 'VimProcInstall'
 ghc-mod:
 :> stack install ghc-mod
 
+
+Convert images, pdfs etc
+:> trizen -S imagemagick-full
 
 -------------------------------------------------------------------------------
 

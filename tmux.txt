@@ -28,3 +28,8 @@ Swap windows 3 and 1:
 
 Move window to a different number(2):
 <Super + :> move-window -t 2
+
+
+Plugins:
+tmux-resurrect
+tpm

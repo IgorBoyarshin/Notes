@@ -2,115 +2,30 @@ While searching, add:
 \c === to ignore case
 \C === make case sensitive
 
-i - insert before current char.
-I - insert at first non-blank char, starting from the beginning of line.
-a - append after current char.
-A - append at the end of the line.
-s - delete char under cursor and begin insert.
-S - delete line and begin insert from the beginning of this line.
-o - create a line after the current and go into Insert mode.
-O - create a line before the current and go into Insert mode.
-C - delete from cursor to the end of line, begin insert.
 
-w - until the start of the next word, EXCLUDING its first character.
-b - move backwards by words.
-e - to the end of the current word, INCLUDING the last character.
+Set syntax
+:> set syn=nasm
+Set filetype(includes syntax)
+:> set ft=nasm
+
+
 ge - backwards equivalent of e.
-$ - to the end of the line, INCLUDING the last character.
-^ - to the first non-blank char of the line.
-0 - to the beginning of the line.
-
-all follow the pattern: [n]f<o>
-fx - find in line char x.
-Fx - backwards.
-tx - search 'til(stops one char before).
-Tx - backwards.
-; - repeat last t,T,f,F command.
-, - repeat backwards -||-.
-
-H, M, L - move high, middle, low within viewport.
-Ctrl+u, Ctrl+d - page up, page down.
-gg - jump to the very first character of the file.
-G - jump to the very last character of the file.
-4G - jump to line 4.
->G - add indentation for this and all the subsequent lines till the end.
-
-x - delete current character.
-r - replace the char under the cursor.
-R - replace more than one char under the cursor.
-d
-dd - delete the whole line.
-2dj - delete current line and 2 lines above.
-df, - delete until comma.
-
-c - change [same as d but put me in insert mode].
-cw - change word.
-cc == S - delete current line and enter insert mode.
-2cw - delete 2 words and enter insert mode.
-
-~ - toggle the case of char under cursor and step forward.
-g~{motion} - swap case of.
-gu{motion} - make lowercase.
-gU{motion} - make uppercase.
 ga - show(bottom) the code for current char.
-
-y - yank(copy) the selected text(also used as operator).
-yw - yank word.
-yy - yank the current line.
-p - paste after cursor.
-P - paste before cursor.
-
->, < - shift right or left.
-= - autoindent.
-
 Ctrl-G - display current location and file status.
-G - move to the end of file.
-gg - to the first line.
-<number>G - move to line number.
-zz - center screen around current line.
-
-/ - search forward.
-? - search backward[SHIFT+/].
-* - search for word under cursor(bounded).
 g* - search for word under cursor(unbounded).
-# - -||- backward(bounded).
-g# - -||- backward(unbounded).
-n - next occurance.
-N - previous occurance.
-Ctrl-O - to the older position.
-Ctrl-I - to the newer position.
 
-% - find bracket match.
 
+SUBSTITUTION
 :s/old/new - substitute(first occurance).
 :s/old/new/g - all occurances in the line.
 :#,#s/old/new/g - between two lines.
 :%s/old/new/g - all in the file.
 :%s/old/new/gc - with a promt.
 
-u - undo.
-Ctrl+R - redo.
-U - fix the whole line.
-
-Ctrl+p - word completion.
-(Ctrl+n) - navigate.
-Ctrl+d - command completion(+TAB).
-Ctrl+w Ctrl-w - jump between windows.
-Ctrl+a, Ctrl+x - inc and dec the number under cursor[can be with count].
-Ctrl+r Ctrl+w(a) - paste the current word(WORD) into command line promt.
-
-:noh - remove highlighting from search.
-:set ic - ignore case[or '\c' after the search text].
-:set is - inc search.
-:set hls - highlight search.
-:set nocp - not compatible mode.
 
 :!<command> - execute external command.
-:w <name> - save the file.
 :r <name> - get text from file and put it after the cursor.
 :r !ls - put the output of the command below the cursor.
-
-v - start/end visual selection.
 
 
 INSERT MODE:
@@ -124,19 +39,14 @@ Ctrl+o - switch to Insert Normal mode.
 <Ctrl+k>{char}{char} - insert char represented by digraph.
 
 
-
 VISUAL MODE:
-v - char-wise.
-V - line-wise.
-Ctrl+v - block wise.
 o - jump between ends of selection.
 gv - repeat last selection.
 When going into Comand from Visual Mode, the command will be populated with 
 :'<,'> that stand for, respectively, the start and the end of visual selection.
 
 
-
-Objects:
+OBJECTS
 words: iw, aw
 sentences: is, as
 paragraphs: ip, ap
@@ -149,7 +59,7 @@ braces: i{, a{
 tags: it, at
 
 
-Registers
+REGISTERS
 <Ctrl+r><reg> - paste contents of <reg>.
 <Ctrl+r>0 - paste just yanked text(Insert mode).
 :reg - list them all.
@@ -163,8 +73,8 @@ _ - Blackhole buffer.
 :let @b=@a - assign contents of a to b.
 
 
-Macros
-q<reg> - start recording.
+MACROS
+Q<reg> - start recording.
 q - end recording(having started).
 <number>@<letter> - execute <number> times(once by default).
 @@ - execute the macro again.

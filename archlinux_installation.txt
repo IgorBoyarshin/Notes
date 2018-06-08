@@ -1,5 +1,3 @@
-Enp4s0f2
-
 fdisk -l
 
 [c]fdisk /dev/sda
@@ -164,3 +162,7 @@ Activities configurator
 Dash to dock
 system-monitor
 Topicons plus
+
+
+-------------------------------------------------------------------------------
+.zprofile is responsible for Xorg auto-launch right after login

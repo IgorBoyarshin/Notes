@@ -333,19 +333,19 @@ OR(newer):
 :> ip addr show [DEVICE]
 
 
-Get disk space(used, left etc)
+Get disk space(used, left etc) [storage, memory]
 :> df -ah
 
-Get folder (directory) size
+Get folder (directory) size [storage, memory]
 :> du -sh
-
-
-To temporarily give more space for /tmp folder
-:> sudo mount -o remount,size=4G,noatime /tmp
 
 
 Get cumulative size of a dir
 :> du -sh <PATH>
+
+
+To temporarily give more space for /tmp folder
+:> sudo mount -o remount,size=4G,noatime /tmp
 
 
 Get info about opened ports, listeting services etc
@@ -401,3 +401,36 @@ Format
 :> mkfs.ntfs /dev/sdb1
 Quick format:
 :> mkfs.ntfs /dev/sdb1 -Q
+
+
+To turn off cores
+(Note: cpu0 can't be turned off)
+(Note: "0" - off, "1" - on)
+:> sudo echo 0 | sudo tee /sys/devices/system/cpu/cpu1/online
+
+
+To read man pages with Vim
+:> man man | vim -
+
+
+Xmonad jsut in case
+:> cd .xmonad
+:> stack ghc xmonad
+
+
+Display package dependencies in a tree format
+:> pactree -s <PACKAGE>
+
+
+Useful commands
+Memory and swap usage
+:> free -h
+:> cat /proc/meminfo
+Display stats with timestamp collumn every 1 second 5 times
+:> vmstat -t 1 5
+Current loggen in users
+:> w
+
+:> find
+:> xargs
+:> grep
