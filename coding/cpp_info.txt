@@ -1,0 +1,50 @@
+// ----------------------------------------------------------------------------
+// ---------------- lvalue, rvalue, move semantics
+// ----------------------------------------------------------------------------
+https://stackoverflow.com/questions/3106110/what-are-move-semantics
+
+
+      int& r1 = 5; // Error
+const int& r2 = 5; // OK
+
+
+// Reference collapsing rules
+ &  & ->  &
+&&  & ->  &
+ & && ->  &
+&& && -> &&
+
+
+// Perfect forwarding
+template<typename T>
+void relay(T&& arg) {
+    foo ( std::forward<T> (arg));
+}
+
+// Implementation of std::forward()
+template<typename T>
+T&& forward(typename remove_reference<T>::type& arg) {
+    return static_cast<T&&>(arg);
+}
+
+
+          | lvalue | const lvalue | rvalue | const rvalue
+----------|--------|--------------|--------|-------------
+      X&  | yes    |              |        |
+const X&  | yes    | yes          | yes    | yes
+      X&& |        |              | yes    |
+----------|--------|--------------|--------|-------------
+const X&& |        |              | yes    | yes
+
+// In practice, you can forget about const X&&
+// (being restricted to read from rvalues is not very useful).
+// ----------------------------------------------------------------------------
+// ---------------- File-private static variables
+// ----------------------------------------------------------------------------
+static int _a_ = 4;
+
+In this example, static tells the compiler to not make the variable _a_
+available from other source files. If another file tries to use _a_, perhaps
+using the extern keyword, it would generate a linker error (unresolved
+external symbol). The same concept applies to functions whose access
+you want to limit to the current file.
