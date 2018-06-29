@@ -76,7 +76,47 @@ static auto x = [](){
 // ----------------------------------------------------------------------------
 // --------------- Output stream
 // ----------------------------------------------------------------------------
-std::ostream& operator<<(std::ostream& stream, const std::string& number) {
-    stream << number;
+std::ostream& operator<<(std::ostream& stream, const std::string& str) {
+    stream << str;
     return stream;
+}
+// ----------------------------------------------------------------------------
+// --------------- Time measurement
+// ----------------------------------------------------------------------------
+#include <chrono>
+// std::chrono::nanoseconds
+//            ::microseconds
+//            ::milliseconds
+//            ::seconds...
+
+const auto start = std::chrono::steady_clock::now();
+const auto someJob = [](){return 0;}();
+const auto elapsedMillis = std::chrono::duration_cast<std::chrono::milliseconds>(
+                        std::chrono::steady_clock::now() - start
+                    ).count();
+// ----------------------------------------------------------------------------
+// --------------- Proper random
+// ----------------------------------------------------------------------------
+#include <random>
+
+// [signed, unsigned]: short, int, long, long long
+// [low, high]
+template<typename T = int>
+T getRandomUniformInt(T low, T high) {
+    static std::random_device rd;
+    static std::mt19937 e2(rd());
+    static std::uniform_int_distribution<T> dist(low, high);
+
+    return dist(e2);
+}
+
+// float, double, long double
+// [low, high)
+template<typename T = float>
+T getRandomUniformFloat(T low, T high) {
+    static std::random_device rd;
+    static std::mt19937 e2(rd());
+    static std::uniform_real_distribution<T> dist(low, high);
+
+    return dist(e2);
 }

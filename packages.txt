@@ -1,0 +1,300 @@
+* Lines starting with (*) are comments.
+* (#) [pac|aur] <package> === package to install.
+* (?) [pac|aur] <package> === potential package, don't install them in the main batch.
+* (%) [pac|aur] <package> === archived. Never install. Just remember that they exist.
+* -----------------------------------------------------------------------------
+* ---------------- Pacman
+* -----------------------------------------------------------------------------
+
+* # [pac] os-prober
+* Needed for UEFI??
+
+# [pac] libreoffice-still
+
+# [pac] jdk8-openjdk
+* Consider later versions
+
+# [pac] powertop
+
+# [pac] htop
+
+# [pac] zip
+
+# [pac] unzip
+
+# [pac] unrar
+
+# [pac] vlc
+* Requires qt4 for gui
+
+# [pac] qt4
+* Required for gui in vlc
+
+# [pac] ntfs-3g
+* Has "advanced ntfs"
+
+# [pac] krita
+
+# [pac] wget
+
+# [pac] youtube-dl
+* :> youtube-dl -f 'bestvideo[height<=?720]+bestaudio/best[height<=?720]' <URL>
+* For playlists (1-based indexing)
+* :> youtube-dl -f 'bestvideo[height<=?720]+bestaudio/best[height<=?720]' --playlist-start 17 --playlist-end 30 <URL>
+
+# [pac] cronie
+* Enable: cronie.service
+
+# [pac] mpv
+* ~/.config/mpv/input.conf
+* ~/.config/mpv/mpv.conf
+* ~/.config/mpv/lua-settings/osc.conf
+
+# [pac] newsboat
+* ~/.newsboat/urls
+* ~/.newsboat/config
+
+# [pac] nasm
+* For Assembly.
+
+# [pac] cmus
+* Alternative backup music player.
+
+# [pac] easytag
+* Change metadata of audio (music) files.
+
+# [pac] gtypist
+
+# [pac] rsync
+
+# [pac] w3m
+
+# [pac] screenfetch
+* Pring information about system into the terminal with logo
+
+# [pac] nomacs
+* Image viewer
+
+# [pac] feh
+* ~/.fehbg
+
+# [pac] scrot
+* Screenshots
+
+# [pac] rxvt-unicode
+* There is an option to use:
+% [aur] rxvt-unicode-pixbuf
+* from AUR for image preview rendering support, but it turns out to be
+* somewhat slow (~0.5s), so stick with w3m for that job.
+* Extension for resizing fonts from AUR:
+% [aur] urxvt-resize-font-git
+
+# [pac] acpi
+* Check battery status in console.
+* :> acpi -i
+
+# [pac] ranger
+* To copy the default config:
+* :> ranger --copy-config=all
+
+# [pac] mupdf
+
+# [pac] evince-no-gnome
+
+# [pac] djview
+
+# [pac] alsa-utils
+# [pac] pulseaudio
+# [pac] ncmpcpp
+# [pac] mpc
+# [pac] mpd
+* Add to .xinitrc:
+* :> [ ! -s ~/.config/mpd/pid ] && mpd
+
+# [pac] qbittorrent
+
+# [pac] xclip
+* Universal copy-paste buffer.
+* Possible fix if xclip stops working, complaining about a missing DISPLAY:
+* Remove(backup) the .Xauthority file at home. At the next start a new one(fixed?)
+* will be generated. And at the one more consequent start everything will work.
+
+# [pac] texlive-most
+* Latex
+? [aur] wiki2beamer
+
+# [pac] img2pdf
+
+* -----------------------------------------------------------------------------
+
+? [pac] cmatrix
+
+? [pac] sl
+* Steam Locomotive
+
+? [pac] gcc-ada
+
+? [pac] mono
+* C# development
+
+? [pac] openmpi
+
+? [pac] tree
+
+? [pac] xorg-xset
+* Manual keyboard rate and delay changing
+* :> xset r rate 200 40
+
+? [pac] wine
+* For .NET apps:
+? [pac] wine-mono
+* For IE:
+? [pac] wine_gecko
+
+? [pac] rofi
+* Instead of dmenu
+
+? [pac] dosfstools
+* Additional format types for mkfs: VFAT, MSDOS
+? [pac] ntfsprogs
+* Additional format types for mkfs: NTFS
+
+* -----------------------------------------------------------------------------
+
+% [pac] mirage
+
+% [pac] apvlv
+* Vim-like. Investigate
+
+* -----------------------------------------------------------------------------
+* ---------------- AUR
+* -----------------------------------------------------------------------------
+
+# [aur] downgrader
+
+# [aur] rar
+
+# [aur] ttf-ms-fonts
+* Fonts: Times New Romans and co.
+
+# [aur] imagemagick-full
+* Convert images, PDFs, etc.
+
+* -----------------------------------------------------------------------------
+
+? [aur] edb-debugger
+* Disassembler and debugger, similar to OllyDbg
+
+? [aur] st
+
+? [aur] bash-pipes
+* :> pipes
+
+? [aur] nsnake
+
+? [aur] vmware-workstation
+* Additional setup required (read arch wiki) (services and modprobe).
+* To fix networking (may require preceding reboot):
+* :> sudo vmware-networks --start
+
+? [aur] python-pywal
+* Draw colors from background image
+
+* -----------------------------------------------------------------------------
+* ---------------- Stack
+* -----------------------------------------------------------------------------
+
+* # [stack] pandoc
+* :> stack install --system-ghc pandoc
+* Takes a long time to complete
+
+* -----------------------------------------------------------------------------
+* ---------------- TODOs
+* -----------------------------------------------------------------------------
+* Fonts:
+* Install powerline fonts from https://github.com/powerline/fonts
+* :> trizen -S ttf-consolas-powerline
+* For special glyphs:
+* :> pacman -S ttf-freefont
+* -----------------------------------------------------------------------------
+* ---------------- Manual
+* -----------------------------------------------------------------------------
+* Oh-My-Zsh
+* :> sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+* Source from .zshrc
+* Place ~/.dircolors
+
+* For tmux install TMP(plugin manager) from github
+
+* Haskell, xmonad, xmobar, ghc
+* [
+*     Haskell:           https://wiki.archlinux.org/index.php/Haskell
+*     Xmonad and Xmobar: http://brianbuccola.com/how-to-install-xmonad-and-xmobar-via-stack/
+* ]
+* # [aur] stack-static
+    * Another solution, remove if unnesessary:
+    * :> trizen -S stack-bin
+    * :> stack setup --system-ghc
+    * :> stack install --system-ghc cabal-install
+* Will create ~/.stack
+* :> stack setup
+* Now you can do ":> stack ghc" or ":> stack ghci"
+* :> cd xmonad
+* :> cd ~/.xmonad
+* :> git clone "https://github.com/xmonad/xmonad" xmonad-git
+* :> git clone "https://github.com/xmonad/xmonad-contrib" xmonad-contrib-git
+* :> git clone "https://github.com/jaor/xmobar" xmobar-git
+* :> stack init
+* :> vim stack.yaml
+* {
+* ...
+* flags:
+*     xmobar:
+*         all_extensions: true
+*         * with_xft: true
+* ...
+* }
+* :> stack install
+* Check that ~/.local/bin is in $PATH
+* :> vim build
+* {
+* #!/bin/sh
+* exec stack ghc -- \
+*   --make xmonad.hs \
+*   -i \
+*   -ilib \
+*   -fforce-recomp \
+*   -main-is main \
+*   -v0 \
+*   -o "$1"
+* }
+* :> chmod a+x build
+* Every time you update (with "git pull") the three downloaded repositories:
+* :> stack install
+* May first need to do if added a new flag or dependency:
+* :> stack clean
+*
+* Also
+* ghc-mod:
+*     :> stack install ghc-mod
+* cabal-install:
+*     :> stack install cabal-install
+*
+* Vimproc (Haskell for Vim):
+* If encounter an .so DLL error => inside Vim run 'VimProcInstall'
+
+
+* Installing Powerlevel9k
+* :> git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+* :> vim .zshrc
+* {
+*     ZSH_THEME="powerlevel9k/powerlevel9k"
+* }
+*
+* Installing Zsh-Syntax-highlighting (https://github.com/zsh-users/zsh-syntax-highlighting)
+* :> git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+* In .zshrc add to plugins: zsh-syntax-highlighting
+*
+* Installing Zsh-autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
+* :> git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+* In .zshrc add to plugins: plugins=(zsh-autosuggestions)

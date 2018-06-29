@@ -1,4 +1,32 @@
 -------------------------------------------------------------------------------
+---------------- General
+-------------------------------------------------------------------------------
+Compile with Stack
+:> stack exec -- ghc Main.hs -o Main
+
+Run without compiling
+:> stack exec -- runghc Main.hs
+
+
+Compile for parallel
+:> stack exec -- ghc -O2 -threaded --make parallel-test.hs
+
+Run for parallel(4 threads)
+:> ./Main +RTS +N4
+
+
+Print the value of an expression without causing it to be evaluated
+:> :sprint x
+
+Evaluate its first argument(to weak head normal form(WHNF) === first-level constructor), return second argument
+:> seq
+
+
+Clear screen in Prelude
+:> :! run the shell command
+:> :! cls under windows
+:> :! clear under linux and OS X
+-------------------------------------------------------------------------------
 ---------------- Main file example
 -------------------------------------------------------------------------------
 -- import Data.List
@@ -60,34 +88,6 @@ import Data.List (foldl')
 
 toDec :: String -> Int
 toDec = foldl' (\acc x -> acc * 2 + digitToInt x) 0
--------------------------------------------------------------------------------
----------------- General notes
--------------------------------------------------------------------------------
-Compile with Stack:
-:> stack exec -- ghc Main.hs -o Main
-
-Run without compiling:
-:> stack exec -- runghc Main.hs
-
-
-Compile for parallel:
-:> stack exec -- ghc -O2 -threaded --make parallel-test.hs
-
-Run for parallel(4 threads):
-:> ./Main +RTS +N4
-
-
-Print the value of an expression without causing it to be evaluated:
-:sprint x
-
-seq:
-evaluate its first argument(to weak head normal form(WHNF) === first-level constructor), return second argument
-
-
-Clear screen in Prelude:
-:! run the shell command
-:! cls under windows
-:! clear under linux and OS X
 -------------------------------------------------------------------------------
 ---------------- Disable warnings(errors)
 -------------------------------------------------------------------------------

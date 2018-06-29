@@ -1,31 +1,27 @@
-ZIP archive {keywords: zip, Zip}
-To compress:
+ZIP archive
+Compress:
 :> zip archive.zip file1 file2 file3
-or to zip a directory
+Compress a directory:
 :> zip -r archive.zip dir1
-To uncompress:
+Uncompress:
 :> unzip archive.zip
-To uncompress into given path:
+Uncompress into given path:
 :> unzip archive.zip -d ~/folder_to_put_into
 
 
-Unarchive RAR with unrar {keywords: rar, Rar, unrar}
-To unarchive:
+Unarchive RAR with unrar
+Unarchive:
 :> unrar x <name>
-To list:
+List:
 :> unrar l <name>
 
 
-Sort yaourt packages based on their rating
-:> yaourt -Ss package --sort w
-
-
 Powerdown
-[-P(default) == powerdown, -r == reboot]
-:> shutdown -P +60 [min]
-:> shutdown -P 1:00 [1 AM]
+[-P(default) === powerdown, -r === reboot]
+:> shutdown -P +60 === [min]
+:> shutdown -P 1:00 === [1 AM]
 :> shutdown -P now
-:> shutdown -c [cancel]
+:> shutdown -c === [cancel]
 
 
 Brightness
@@ -39,11 +35,11 @@ brightness - set by user, current value
 
 Search the filesystem
 :> grep -rnw 'PATH' -e 'PATTERN'
--R === traverse the whole tree, follow symlinks
--r === traverse the whole tree, dont' follow symlinks
+-R === recursive. Traverse the whole tree, follow symlinks
+-r === recursive. Traverse the whole tree, dont' follow symlinks
 -n === show line numbers
 -w === match the whole word
--l === don't show the matches, just file names
+-l === don't show the matches, just show file names
 --include=\*.{c,h}
 --exclude=*.o
 --exclude-dir={dir1,dir2,*.dst}
@@ -56,10 +52,10 @@ The . at end of the source path is a specific cp syntax that allow to copy all f
 
 
 Copy comparison
-- Using cp(the following two are equivalent):
+Using cp(the following two are equivalent):
 :> cp -a source/. dest/source
 :> cp -a source dest
-- Using rsync(the following two are equivalent):
+Using rsync(the following two are equivalent):
 :> rsync -avh --progress source/ dest/source
 :> rsync -avh --progress source dest
 
@@ -90,13 +86,6 @@ set them through directory parameters(chmod, chown)
 
 To mount an SD card
 :> mount -t vfat /dev/mmcblk0p1 /mount/path
-
-
-Additional format types
-VFAT(vfat), MSDOS(msdos):
-:> pacman -S dosfstools
-NTFS(ntfs):
-:> pacman -S ntfsprogs
 
 
 Create a bootable usb(or just transfer an iso to a usb) with dd:
@@ -147,6 +136,17 @@ In order to add new fonts:
 
 PowerTop custom service at:
 /etc/systemd/system/powertop-custom.service
+{
+    [Unit]
+    Description=Powertop tunings
+
+    [Service]
+    ExecStart=/usr/bin/powertop --auto-tune
+    RemainAfterExit=true
+
+    [Install]
+    WantedBy=multi-user.target
+}
 Script at:
 /usr/local/sbin/powertop-custom.sh
 
@@ -168,23 +168,23 @@ fmask - files
 
 Timestamps
 atime - access time
-ctime - change time (+attributes)
-mtime - modification time(-attributes)
+mtime - modification time (-attributes)
+ctime - change time       (+attributes)
 
 
 Mounting external USB
 1) :> mkdir /mnt/External
 2) make yourself(and your group) the owner with chown
 3) allow all permissions with chmod
-4) when mounting, use smth like(specify both uid and gid):
+4) when mounting, specify both uid and gid:
 :> sudo mount -o uid=igorek,gid=users,fmask=111,dmask=000 /dev/sdb1 /mnt/External
 
 
-Stack install with flag example
+Stack install with flag
 :> stack install --flag xmobar:with_xft xmobar
 
 
-Info about keybindings:
+Info about keybindings
 :> loadkeys
 :> showkey
 
@@ -239,7 +239,7 @@ LightDM has a script /etc/lightdm/lightdm/Xsession which(at the end) calls a
 user-defined script ~/.xsession
 
 
-Keyboard speed {keywords: keyboard}
+Keyboard speed
 :> pacman -S xorg-xset
 Temporary(not recommended, as it may be reset sometimes by something):
 :> xset r rate 200 40
@@ -252,18 +252,9 @@ So, for example, xset r rate 250 40 === ... -ardelay 250 -arinterval 25
 
 Language
 Temporary:
-setxkbmap -model pc104 -layout us,ru -variant , -option grp:alt_shift_toggle
+:> setxkbmap -model pc104 -layout us,ru -variant , -option grp:alt_shift_toggle
 Permanently:
-localectl --no-convert set-x11-keymap us,ru pc104 , grp:alt_shift_toggle
-
-
-Wallpaper
-Into .xsession:
-:> feh --bg-center <path-to-wallpaper>
-
-
-Console battery status check:
-:> acpi -i
+:> localectl --no-convert set-x11-keymap us,de,ru,ua pc104 ,,, grp:alt_shift_toggle
 
 
 Generate assembly code with gcc
@@ -281,45 +272,20 @@ Need to put plug.vim(located in ~/.local/share/nvim/site/autoload) into ~/.vim/a
 (At least needed for ranger to open files correctly)
 
 
-Add dotfiles/.vim/snippets into ~/.vim
-
-
 Altera Quartus start command
 :> /opt/altera/quartus/bin/quartus --64bit
 
 
-Possible fix if xclip stops working, complaining about a missing DISPLAY:
-Remove(backup) the .Xauthority file at home. At the next start a new one(fixed?) will be generated. And at the one more consequent start everything will work.
-
-
-Git, list all untracket files
-:> git status -u
-
-
-In order to make grub discover Windows {keywords: Grub, dual boot, windows}
+In order to make grub discover Windows in dual boot mode:
 Install os-prober. Nothing else required. On the next grub-mkconfig it should
 find and add menuentry for windows.
-
-
-MIME types list for extensions
-https://en.wikipedia.org/wiki/Media_type
-~/.config/mimeapps.list
-
-
-Xmonad
-Recompile:
-:> xmonad --recompile
-Close current focused window:
-:> mod+shift+c
-Increment/decrement amount of windows in the master area
-:> mod+,/.
 
 
 Print character by its code
 :> echo $'\ue621'
 
 
-To find the class name of an application(click on thr app)
+To find the class name of an application (click on the window with cursor)
 :> xprop | grep WM_CLASS
 
 
@@ -335,11 +301,8 @@ OR(newer):
 
 Get disk space(used, left etc) [storage, memory]
 :> df -ah
-
 Get folder (directory) size [storage, memory]
 :> du -sh
-
-
 Get cumulative size of a dir
 :> du -sh <PATH>
 
@@ -380,10 +343,10 @@ Xmonad recompilation at startup problem
 There's a 'build' file in .xmonad.
 Rename it to whatever.
 Otherwise(why???) it is executed at each startup(not xorg restart!), thus
-forcing a (partial??) recompilation.
+forcing a (partial(because faster than usual)??) recompilation.
 
 
-To downgrade a package with pacman
+Downgrade a package with pacman
 :> pacman -U https://archive.archlinux.org/packages/p/physfs/physfs-2.0.3-3-x86_64.pkg.tar.xz
 Find out the package name from here:
 https://archive.archlinux.org/packages/p/physfs/
@@ -401,21 +364,28 @@ Format
 :> mkfs.ntfs /dev/sdb1
 Quick format:
 :> mkfs.ntfs /dev/sdb1 -Q
+Format into FAT32(vfat)
+:> mkfs.vfat -n 'LABEL_NAME' -I /dev/sdb1
 
 
-To turn off cores
+Turn off cores
 (Note: cpu0 can't be turned off)
 (Note: "0" - off, "1" - on)
 :> sudo echo 0 | sudo tee /sys/devices/system/cpu/cpu1/online
 
 
-To read man pages with Vim
+Read man pages with Vim
 :> man man | vim -
 
 
-Xmonad jsut in case
+Xmonad just in case (if everything else fails you)
 :> cd .xmonad
 :> stack ghc xmonad
+
+
+If Xmonad refuses to recompile due to missing haskell libraries => do
+:> stack install
+in its root folder
 
 
 Display package dependencies in a tree format
@@ -431,6 +401,68 @@ Display stats with timestamp collumn every 1 second 5 times
 Current loggen in users
 :> w
 
-:> find
 :> xargs
-:> grep
+
+
+Convert (merge) multiple PDFs into one (with ghostscript)
+:> gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=temp.pdf pdf1.pdf pdf2.pdf
+Convert (merge) multiple images into one (with img2pdf)
+:> img2pdf img1.png img2.jpg -o out.pdf
+Compress (could also convert) .jpg images to reduce size (and quality) with for-loop (in parallel??)
+:> for file in IMG*; do convert -strip -interlace Plane -gaussian-blur 0.05 -quality 30% $file "small_$file"; echo "$file"; done
+
+
+grep
+-w === exact match (not allow the search pattern to be a part of the word)
+-n === display line numbers
+-B, -A, -C <number> === display <number> lines before, after, around (context)
+-l === list only file names where the search succeeded
+-i === case insensitive
+-r === recursive (step into directories)
+-P === use Perl-compatible regex
+
+
+While typing a command in shell, to do that in VIM file
+:> Ctrl+x+e
+
+
+In shell to paste the last argument
+:> Alt+.
+In shell:
+:> Ctrl+R === reverse search of history (Ctrl+R to get next)
+:> Ctrl+G === to exit
+
+
+Cut on ':' delimiter and get filed 2
+:> cat file.txt | cut -d: -f2
+Ignore white space, case insensitive
+:> cat file.txt | sort -bf
+Print only unique lines
+:> uniq
+Word count
+:> wc
+
+
+Find out what GPU you have
+:> lspci -k | grep -A 2 -E "(VGA|3D)"
+
+
+Display file list provided by local package
+:> pacman -Ql <PACKAGE>
+
+
+Find command
+:> find . -name "*.txt"
+
+
+At startup(??)
+:> pulseaudio --start
+
+
+To fix networking in VMWare (may require preceding reboot):
+:> sudo vmware-networks --start
+
+
+Get all installed packages
+:> pacman -Qe
+:> yapurt -Qe

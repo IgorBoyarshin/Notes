@@ -48,3 +48,7 @@ available from other source files. If another file tries to use _a_, perhaps
 using the extern keyword, it would generate a linker error (unresolved
 external symbol). The same concept applies to functions whose access
 you want to limit to the current file.
+// ----------------------------------------------------------------------------
+// ---------------- Compiler options
+// ----------------------------------------------------------------------------
+-std=c++17

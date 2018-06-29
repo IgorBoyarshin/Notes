@@ -97,3 +97,7 @@ Undo commit
 :> git reset HEAD~
 :> ...
 :> git commit -c ORIG_HEAD
+
+
+Reser (revert) to commit
+:> git reset --hard HEAD

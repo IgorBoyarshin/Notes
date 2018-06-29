@@ -33,7 +33,7 @@ Ctrl+w - delete back one word.
 Ctrl+u - delete back to the start of the line.
 Ctrl+[ - switch to Normal mode(same as ESC).
 Ctrl+o - switch to Insert Normal mode.
-<Ctrl+r>0 - paste just yanked text(Insert mode).
+<Ctrl+r>+ - paste just yanked text(Insert mode). [register name]
 <Ctrl+r>={expr}<CR> - evalulate expr(in expression register), paste the result.
 <Ctrl+v>{code} - insert any char by its code.
 <Ctrl+k>{char}{char} - insert char represented by digraph.
@@ -42,7 +42,7 @@ Ctrl+o - switch to Insert Normal mode.
 VISUAL MODE:
 o - jump between ends of selection.
 gv - repeat last selection.
-When going into Comand from Visual Mode, the command will be populated with 
+When going into Comand from Visual Mode, the command will be populated with
 :'<,'> that stand for, respectively, the start and the end of visual selection.
 
 
@@ -86,3 +86,17 @@ q
 
 Play a macro:
 @<reg>
+
+
+Surround.vim
+Delete: ds<where>
+Change: cs<old><new>, cS<1><2> - to put <2> into new lines
+Add: ys<where><what> [S - for new line] - surround with indent
+In Visual Mode: S<what>
+
+Possible surround targets: (), {}, {}, <>, "", '', w, t, p, s.
+Opening stuff adds indent, closing - doesn't.
+
+
+Reload .vimrc:
+:so ~/.vimrc
