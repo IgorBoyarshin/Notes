@@ -2,6 +2,102 @@
 * (#) [pac|aur] <package> === package to install.
 * (?) [pac|aur] <package> === potential package, don't install them in the main batch.
 * (%) [pac|aur] <package> === archived. Never install. Just remember that they exist.
+
+* -----------------------------------------------------------------------------
+* ---------------- Manual
+* -----------------------------------------------------------------------------
+
+* kdenlive
+* wps
+* lutris
+
+* After the file - run distribute.zsh.
+
+* Trizen
+* :> git clone https://aur.archlinux.org/trizen-git.git
+* :> cd trizen-git
+* :> makepkg -si
+
+* Oh-My-Zsh
+* :> sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+* Source from .zshrc
+* Place ~/.dircolors
+
+* For tmux install TMP(plugin manager) from github
+
+* Haskell, xmonad, xmobar, ghc
+* [
+*     Haskell:           https://wiki.archlinux.org/index.php/Haskell
+*     Xmonad and Xmobar: http://brianbuccola.com/how-to-install-xmonad-and-xmobar-via-stack/
+* ]
+* # [aur] stack-static
+    * Another solution, remove if unnesessary:
+    * :> trizen -S stack-bin
+    * :> stack setup --system-ghc
+    * :> stack install --system-ghc cabal-install
+* Will create ~/.stack
+* :> stack setup
+* Now you can do ":> stack ghc" or ":> stack ghci"
+* :> cd xmonad
+* :> cd ~/.xmonad
+* :> git clone "https://github.com/xmonad/xmonad" xmonad-git
+* :> git clone "https://github.com/xmonad/xmonad-contrib" xmonad-contrib-git
+* :> git clone "https://github.com/jaor/xmobar" xmobar-git
+* :> stack init
+* :> vim stack.yaml
+* {
+* ...
+* flags:
+*     xmobar:
+*         all_extensions: true
+*         * with_xft: true
+* ...
+* }
+* :> stack install
+* Check that ~/.local/bin is in $PATH
+* :> vim build
+* {
+* #!/bin/sh
+* exec stack ghc -- \
+*   --make xmonad.hs \
+*   -i \
+*   -ilib \
+*   -fforce-recomp \
+*   -main-is main \
+*   -v0 \
+*   -o "$1"
+* }
+* :> chmod a+x build
+* Every time you update (with "git pull") the three downloaded repositories:
+* :> stack install
+* May first need to do if added a new flag or dependency:
+* :> stack clean
+*
+* Also
+* ghc-mod:
+*     :> stack install ghc-mod
+* cabal-install:
+*     :> stack install cabal-install
+*
+* Vimproc (Haskell for Vim):
+* If encounter an .so DLL error => inside Vim run 'VimProcInstall'
+
+
+* Installing Powerlevel9k
+* :> git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+* :> vim .zshrc
+* {
+*     ZSH_THEME="powerlevel9k/powerlevel9k"
+* }
+*
+* Installing Zsh-Syntax-highlighting (https://github.com/zsh-users/zsh-syntax-highlighting)
+* :> git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+* In .zshrc add to plugins: zsh-syntax-highlighting
+*
+* Installing Zsh-autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
+* :> git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+* In .zshrc add to plugins: plugins=(zsh-autosuggestions)
+
 * -----------------------------------------------------------------------------
 * ---------------- Pacman
 * -----------------------------------------------------------------------------
@@ -216,85 +312,3 @@
 * :> trizen -S ttf-consolas-powerline
 * For special glyphs:
 * :> pacman -S ttf-freefont
-* -----------------------------------------------------------------------------
-* ---------------- Manual
-* -----------------------------------------------------------------------------
-* Oh-My-Zsh
-* :> sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-* Source from .zshrc
-* Place ~/.dircolors
-
-* For tmux install TMP(plugin manager) from github
-
-* Haskell, xmonad, xmobar, ghc
-* [
-*     Haskell:           https://wiki.archlinux.org/index.php/Haskell
-*     Xmonad and Xmobar: http://brianbuccola.com/how-to-install-xmonad-and-xmobar-via-stack/
-* ]
-* # [aur] stack-static
-    * Another solution, remove if unnesessary:
-    * :> trizen -S stack-bin
-    * :> stack setup --system-ghc
-    * :> stack install --system-ghc cabal-install
-* Will create ~/.stack
-* :> stack setup
-* Now you can do ":> stack ghc" or ":> stack ghci"
-* :> cd xmonad
-* :> cd ~/.xmonad
-* :> git clone "https://github.com/xmonad/xmonad" xmonad-git
-* :> git clone "https://github.com/xmonad/xmonad-contrib" xmonad-contrib-git
-* :> git clone "https://github.com/jaor/xmobar" xmobar-git
-* :> stack init
-* :> vim stack.yaml
-* {
-* ...
-* flags:
-*     xmobar:
-*         all_extensions: true
-*         * with_xft: true
-* ...
-* }
-* :> stack install
-* Check that ~/.local/bin is in $PATH
-* :> vim build
-* {
-* #!/bin/sh
-* exec stack ghc -- \
-*   --make xmonad.hs \
-*   -i \
-*   -ilib \
-*   -fforce-recomp \
-*   -main-is main \
-*   -v0 \
-*   -o "$1"
-* }
-* :> chmod a+x build
-* Every time you update (with "git pull") the three downloaded repositories:
-* :> stack install
-* May first need to do if added a new flag or dependency:
-* :> stack clean
-*
-* Also
-* ghc-mod:
-*     :> stack install ghc-mod
-* cabal-install:
-*     :> stack install cabal-install
-*
-* Vimproc (Haskell for Vim):
-* If encounter an .so DLL error => inside Vim run 'VimProcInstall'
-
-
-* Installing Powerlevel9k
-* :> git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-* :> vim .zshrc
-* {
-*     ZSH_THEME="powerlevel9k/powerlevel9k"
-* }
-*
-* Installing Zsh-Syntax-highlighting (https://github.com/zsh-users/zsh-syntax-highlighting)
-* :> git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-* In .zshrc add to plugins: zsh-syntax-highlighting
-*
-* Installing Zsh-autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
-* :> git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-* In .zshrc add to plugins: plugins=(zsh-autosuggestions)

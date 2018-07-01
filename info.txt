@@ -466,3 +466,7 @@ To fix networking in VMWare (may require preceding reboot):
 Get all installed packages
 :> pacman -Qe
 :> yapurt -Qe
+
+
+Sudoers file
+igorek ALL=(ALL:ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/pacman -Syu,/usr/bin/pacman -S,/usr/bin/pacman -Ss
