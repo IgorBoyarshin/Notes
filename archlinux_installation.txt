@@ -6,6 +6,7 @@
 See IPs and Ethernet card
 :> ip a
 
+Have your Ethernet cable plugged in before you boot!!
 :> ping -c 3 www.google.com
 
 [dhcpcd]
@@ -23,6 +24,10 @@ Boot: +200M, set bootable flag (a)
 Swap: +4G, set swap flag (82)
 Root: +25G
 Home +??
+
+# EFI was 100MB, partition2
+# Add your root (100G)
+# Add swap(16G) on hdd
 -------------------------------- Filesystem
 For Boot, Root and Home
 :> mkfs.ext4 /dev/sda1
@@ -44,26 +49,36 @@ For Boot, Root and Home
 -------------------------------- Enter the new system
 :> arch-chroot /mnt
 -------------------------------- Time zone
-ln -sf /usr/share/zoneinfo..... /etc/localtime
+ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
 hwclock --systohc --utc
 -------------------------------- Locale
 :> vim /etc/locale.gen
 :> locale-gen
 {
-    
+    en_US.UTF-8 UTF-8
+    en_US ISO-8859-1
+    ...
 }
+
 :> vim /etc/locale.conf
 {
     LANG=en_US.UTF-8
 }
 OR ALTERNATIVELY
-:> localectl set-locale LANG="en_US.UTF-8"
+    :> locale-gen
+    :> echo LANG=en_US.UTF-8 > /etc/locale.conf
+    :> export LANG=en_US.UTF-8
+OR ALTERNATIVELY
+    :> localectl set-locale LANG="en_US.UTF-8"
 -------------------------------- Install stuff
-:> pacman -S networkmanager grub intel-ucode
+:> pacman -S networkmanager grub efibootmgr intel-ucode sudo os-prober zsh
 # :> pacman -S grub-bios intel-ucode linux-headers wpa_supplicant wireless_tools [vim] [neovim] [git]
 -------------------------------- Grub
-:> grub-install --target=i386-pc --recheck /dev/sda
+/boot/efi already mounted!!
+:> grub-install --target=x86_64-efi --bootloader-id=arch_grub_uefi --efi-directory=/boot/efi --recheck
 :> grub-mkconfig -o /boot/grub/grub.cfg
+* :> grub-install --target=i386-pc --recheck /dev/sda
+* :> grub-mkconfig -o /boot/grub/grub.cfg
 -------------------------------- Other
 :> mkinitcpio -p linux
 
@@ -72,6 +87,8 @@ OR ALTERNATIVELY
 
 Set hostname
 :> hostnamectl set-hostname apollo
+(If doesn't work):
+:> echo "apollo" > /etc/hostname
 
 ???
 cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
@@ -115,9 +132,6 @@ pacman -S xf86-video-intel lib32-intel-dri lib32-mesa lib32-libgl   [use mesa]
 ------ nvidia fast
 pacman -S nvidia lib32-nvidia-libgl
 ------ nvidia
-
-
-pacman -S sudo yaourt
 
 visudo [uncomment wheel]
 useradd -m -g users -G audio,lp,optical,storage,video,wheel,games,power,scanner -s /bin/bash igorek   [other shell]

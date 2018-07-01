@@ -221,6 +221,11 @@
 
 # [pac] img2pdf
 
+# [pac] dosfstools
+* Additional format types for mkfs: VFAT, MSDOS
+# [pac] ntfsprogs
+* Additional format types for mkfs: NTFS
+
 * -----------------------------------------------------------------------------
 
 ? [pac] cmatrix
@@ -249,11 +254,6 @@
 
 ? [pac] rofi
 * Instead of dmenu
-
-? [pac] dosfstools
-* Additional format types for mkfs: VFAT, MSDOS
-? [pac] ntfsprogs
-* Additional format types for mkfs: NTFS
 
 * -----------------------------------------------------------------------------
 
