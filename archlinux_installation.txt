@@ -71,7 +71,7 @@ OR ALTERNATIVELY
 OR ALTERNATIVELY
     :> localectl set-locale LANG="en_US.UTF-8"
 -------------------------------- Install stuff
-:> pacman -S networkmanager grub efibootmgr intel-ucode sudo os-prober zsh
+:> pacman -S networkmanager grub efibootmgr intel-ucode sudo os-prober zsh vim git neovim dialog linux-headers
 # :> pacman -S grub-bios intel-ucode linux-headers wpa_supplicant wireless_tools [vim] [neovim] [git]
 -------------------------------- Grub
 /boot/efi already mounted!!
@@ -106,13 +106,15 @@ cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 :> reboot
 ------------------------------------------
 post install
+
+:> pacman -S xf86-video-intel mesa xorg-server xorg-xinit nvidia
 ------------------------------------------
-Enable dhcpcd
+* Enable dhcpcd
 
 localectl set-locale LANG="en_US.UTF-8"
 
-pacman -Sy networkmanager network-manager-applet wireless_tools wpa_supplicant wpa_actiond dialog
-pacman -S xf86-input-libinput xorg-server xorg-xinit (xorg-server-utils) mesa
+* pacman -Sy networkmanager network-manager-applet wireless_tools wpa_supplicant wpa_actiond dialog
+* pacman -S xf86-input-libinput xorg-server xorg-xinit (xorg-server-utils) mesa
 ........lspci === hardware
 
 vim /etc/pacman.conf
@@ -127,7 +129,7 @@ vim /etc/pacman.conf
 pacman -S xf86-video-nouveau lib32-nouveau-dri
 ------ nvidia
 ------ intel
-pacman -S xf86-video-intel lib32-intel-dri lib32-mesa lib32-libgl   [use mesa]
+pacman -S xf86-video-intel
 ------ intel
 ------ nvidia fast
 pacman -S nvidia lib32-nvidia-libgl
