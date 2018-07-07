@@ -447,6 +447,10 @@ Find out what GPU you have
 :> lspci -k | grep -A 2 -E "(VGA|3D)"
 
 
+Print info about hardware
+:> lspci
+
+
 Display file list provided by local package
 :> pacman -Ql <PACKAGE>
 
@@ -470,3 +474,7 @@ Get all installed packages
 
 Sudoers file
 igorek ALL=(ALL:ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/pacman -Syu,/usr/bin/pacman -S,/usr/bin/pacman -Ss
+
+
+Disable stuff here
+/etc/modprobe.d/blacklist.conf  
