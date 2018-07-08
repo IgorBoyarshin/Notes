@@ -111,7 +111,7 @@
 *
 * Installing Zsh-autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
 * :> git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-* In .zshrc add to plugins: plugins=(zsh-autosuggestions)
+* In .zshrc add to plugins: zsh-autosuggestions
 
 * -----------------------------------------------------------------------------
 * ---------------- Pacman
@@ -223,6 +223,7 @@
 # [pac] ncmpcpp
 # [pac] mpc
 # [pac] mpd
+* Once installed, update database by pressing 'u' inside ncmpcpp
 * Add to .xinitrc:
 * :> [ ! -s ~/.config/mpd/pid ] && mpd
 

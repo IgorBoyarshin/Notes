@@ -133,6 +133,19 @@ In order to add new fonts:
 6) Reload .Xresources
     :> xrdb ~/.Xresources
 
+Just to remember:
+https://seasonofcode.com/posts/how-to-set-default-fonts-and-font-aliases-on-linux.html
+vim .config/fontconfig/fonts.conf
+{
+    <?xml version='1.0'?>
+    <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
+    <fontconfig>
+    </fontconfig>
+}
+
+ChromeOs fonts:
+:> trizen -S ttf-croscore
+
 
 PowerTop custom service at:
 /etc/systemd/system/powertop-custom.service
@@ -346,6 +359,10 @@ Otherwise(why???) it is executed at each startup(not xorg restart!), thus
 forcing a (partial(because faster than usual)??) recompilation.
 
 
+Xmonad key codes located at
+/usr/include/X11/keysymdef.h
+
+
 Downgrade a package with pacman
 :> pacman -U https://archive.archlinux.org/packages/p/physfs/physfs-2.0.3-3-x86_64.pkg.tar.xz
 Find out the package name from here:
@@ -477,4 +494,8 @@ igorek ALL=(ALL:ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/pacman
 
 
 Disable stuff here
-/etc/modprobe.d/blacklist.conf  
+/etc/modprobe.d/blacklist.conf
+
+
+Extract .deb packages (data from it)
+:> ar p mypackage.deb data.tar.xz | tar xJ
