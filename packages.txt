@@ -184,6 +184,9 @@
 
 # [pac] w3m
 
+# [pac] ttf-croscore
+* Chrome OS fonts
+
 # [pac] screenfetch
 * Pring information about system into the terminal with logo
 

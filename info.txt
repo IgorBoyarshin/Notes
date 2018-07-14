@@ -16,6 +16,11 @@ List:
 :> unrar l <name>
 
 
+Unarchive .tar.gz
+:> tar -xzvf archive.tar.gz
+:> tar -xzvf archive.tar.gz -C DEST_FOLDER
+
+
 Powerdown
 [-P(default) === powerdown, -r === reboot]
 :> shutdown -P +60 === [min]
