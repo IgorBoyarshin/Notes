@@ -1,11 +1,13 @@
 # The name of the main file and executable
 mainFileName = main
 # Files that have .h and .cpp versions
-classFiles = Foo Bar
+classFiles =
 # Files that only have the .h version
-justHeaderFiles = Defs
+justHeaderFiles =
 # Compilation flags
 OPTIMIZATION_FLAG = -O0
+COMPILER_GLAGS = -Wall
+LINKER_FLAGS =
 
 
 # Auxiliary
@@ -16,13 +18,13 @@ filesH = $(addsuffix .h, $(classFiles) $(justHeaderFiles))
 all: cleanExe $(mainFileName)
 
 
-# Compilation
+# Compiler
 %.o: %.cpp $(filesH)
-	g++ $(OPTIMIZATION_FLAG) -c $<
+	g++ $(COMPILER_GLAGS) $(OPTIMIZATION_FLAG) -c $<
 
-# Execution
+# Linker
 $(mainFileName): $(filesObj)
-	g++ $(OPTIMIZATION_FLAG) $^ -o $@
+	g++ $(COMPILER_GLAGS) $(OPTIMIZATION_FLAG) $(LINKER_FLAGS) $^ -o $@
 
 
 # Utils

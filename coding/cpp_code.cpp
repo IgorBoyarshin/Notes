@@ -120,3 +120,32 @@ T getRandomUniformFloat(T low, T high) {
 
     return dist(e2);
 }
+// ----------------------------------------------------------------------------
+// --------------- Explicit specialization in non-namespace scope solution
+// ----------------------------------------------------------------------------
+template<typename T>
+struct identity { typedef T type; };
+
+
+template<typename T>
+class CConstraint
+{
+    public:
+        template <typename TL>
+            void Verify(int position, int constraints[])
+            {
+                Verify(position, constraints, identity<TL>());
+            }
+
+    private:
+        template<typename TL>
+            void Verify(int, int[], identity<TL>)
+            {
+                // Unspecialized
+            }
+
+        void Verify(int, int[], identity<int>)
+        {
+            // Good
+        }
+};

@@ -18,10 +18,6 @@
 * :> systemctl daemon-reload
 * :> systemctl enable ntpd
 
-* ----- Battery
-* :> pacman -S tlp
-* :> systemctl enable tlp
-
 * After the file - run distribute.zsh.
 
 * Trizen
@@ -34,7 +30,9 @@
 * Source from .zshrc
 * Place ~/.dircolors
 
-* For tmux install TMP(plugin manager) from github
+* For tmux install TMP(plugin manager) from github:
+* :> git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+* Inside tmux press `+I (prefix+I) to Install
 
 * Haskell, xmonad, xmobar, ghc
 * [
@@ -125,9 +123,11 @@
 # [pac] jdk8-openjdk
 * Consider later versions
 
-# [pac] powertop
-
 # [pac] htop
+
+# [pac] tlp
+* :> sudo systemctl enable tlp.service tlp-sleep.service
+* :> sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
 
 # [pac] tmux
 
@@ -149,6 +149,13 @@
 * Has "advanced ntfs"
 
 # [pac] krita
+
+* Bluetooth
+* # [pac] bluez bluez-utils pulseaudio-bluetooth blueman
+* :> sudo systemctl enable bluetooth.service
+* To make it work, pulseaudio must be restarted, so reboot or do this:
+* :> killall pulseaudio
+* Make sure you are in the "lp" group
 
 # [pac] wget
 
