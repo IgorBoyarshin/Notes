@@ -7,6 +7,19 @@
 * ---------------- Manual
 * -----------------------------------------------------------------------------
 
+* WPS languages
+* http://wps-community.org/download/dicts/
+* https://askubuntu.com/questions/602352/change-spell-check-language-in-wps-office
+* Extract zip, put into .kingsoft/office6/dicts
+
+* PVS-Studio
+* # [aur] pvs-studio
+* # [pac] strace
+* :> no-internet "pvs-studio-analyzer trace -- make"
+* :> no-internet "pvs-studio-analyzer analyze"
+* :> no-internet "plog-converter -a GA:1,2 -t tasklist ./PVS-Studio.log"
+
+
 * kdenlive
 * wps
 * lutris
@@ -111,6 +124,57 @@
 * :> git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 * In .zshrc add to plugins: zsh-autosuggestions
 
+
+Bumblebee
+Check drivers in use:
+:> lspci -k | grep -A 2 -E "(VGA|3D)"
+
+# [pac] nvidia
+# [pac] bumblebee
+:> gpasswd -a user bumblebee
+:> sudo systemctl enable bumblebeed.service
+* For power management:
+# [pac] bbswitch
+* Reboot!!!
+
+* Possibly a better bridge
+* (Note: currently has a bug because of mesa. Segfaults)
+* # [pac] primus
+* To use:
+* :> optirun -b primus glxgears
+* OR separately
+* :> primusrun glxgears
+* Or, set Bridge=primus in /etc/bumblebee/bumblebee.conf and you will not have to specify it on the command line.
+
+To fix not working after boot from suspend:
+/etc/bumblebee/bumblebee.conf:
+{
+    [driver-nvidia]
+    PMMethod=bbswitch
+
+    # ...
+
+    [driver-nouveau]
+    PMMethod=bbswitch
+}
+
+* Test that everything is successful:
+# [pac] mesa-demos
+* :> optirun glxgears -info
+* OR
+* :> optirun glxspheres64
+
+* Check if the discrete GPU is ON/OFF.
+* Also, rewrite this variable in order to manually do this (possibly no need for manual intervention)
+* :> cat /proc/acpi/bbswitch
+
+* Check how many apps are currently usaing Bumblebee:
+* :> optirun --status
+
+* Open nvidia-settings menu
+* :> optirun -b none nvidia-settings -c :8
+* (First install:)
+* # [pac] nvidia-settings
 * -----------------------------------------------------------------------------
 * ---------------- Pacman
 * -----------------------------------------------------------------------------
@@ -133,9 +197,11 @@
 
 # [pac] zip
 
-# [pac] unzip
+* SSH
+# [pac] openssh
+* :> sudo systemctl enable sshd.service
 
-# [pac] feh
+# [pac] unzip
 
 # [pac] unrar
 
@@ -156,6 +222,8 @@
 * To make it work, pulseaudio must be restarted, so reboot or do this:
 * :> killall pulseaudio
 * Make sure you are in the "lp" group
+* To use, run:
+* :> blueman-manager
 
 # [pac] wget
 
@@ -299,6 +367,11 @@
 # [aur] downgrader
 
 # [aur] rar
+
+# [aur] tusk
+* Evernote web client
+
+# [aur] ttf-wps-fonts
 
 # [aur] ttf-ms-fonts
 * Fonts: Times New Romans and co.

@@ -49,6 +49,15 @@ using the extern keyword, it would generate a linker error (unresolved
 external symbol). The same concept applies to functions whose access
 you want to limit to the current file.
 // ----------------------------------------------------------------------------
-// ---------------- Compiler options
+// ---------------- Compiler options (flags)
 // ----------------------------------------------------------------------------
 -std=c++17
+// ----------------------------------------------------------------------------
+// ---------------- PVS-studio
+// ----------------------------------------------------------------------------
+no-internet "pvs-studio-analyzer trace -- make"
+no-internet "pvs-studio-analyzer analyze"
+no-internet "plog-converter -a GA:1,2 -t tasklist ./PVS-Studio.log"
+
+// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com

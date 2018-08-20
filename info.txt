@@ -16,6 +16,13 @@ List:
 :> unrar l <name>
 
 
+List .tar
+:> tar -tvf archive.tar
+-t === list contents
+-v === vervbose
+-f === specify file
+For .tar.gz add:
+-z === griz the file first
 Unarchive .tar.gz
 :> tar -xzvf archive.tar.gz
 :> tar -xzvf archive.tar.gz -C DEST_FOLDER
@@ -504,3 +511,25 @@ Disable stuff here
 
 Extract .deb packages (data from it)
 :> ar p mypackage.deb data.tar.xz | tar xJ
+
+
+No internet with iptables
+:> groupadd no-internet
+(Validate: :> grep no-internet /etc/group)
+:> usermod -a -G no-internet igorek
+:> vim .local/bin/no-internet
+{
+#!/bin/bash
+sg no-internet "$@"
+}
+:> chmod +x ./local/bin/no-internet
+:> vim .no-internet_rules
+{
+#!/bin/bash
+iptables -A OUTPUT -m owner --gid-owner no-internet -j DROP
+}
+:> chmod +x .no-internet_rules
+:> sudo ./no-internet_rules
+Logout, Login in order for group changes to take affect
+Usage:
+:> no-internet "ping google.com"
