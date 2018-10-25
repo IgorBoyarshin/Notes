@@ -1,0 +1,13 @@
+Server:
+(net-tools for ifconfig)
+:> instp nfs-utils net-tools
+sudo ifconfig enp.. inet 10.18.51.1
+sudo ifconfig enp.. netmask 255.255.255.0
+sudo exportfs -rav
+sudo systemctl start nfs-server.service
+sudo systemctl restart nfs-server.service
+
+Client:
+sudo ifconfig enp.. inet 10.18.51.1
+sudo ifconfig enp.. netmask 255.255.255.0
+sudo mount 10.18.51.1:/home/foresstt/Desktop/private-data /mnt/External

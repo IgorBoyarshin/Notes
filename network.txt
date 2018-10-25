@@ -1,0 +1,15 @@
+General
+:> ip addr show
+:> sudo ip addr {add|delete} 10.19.51.3/24 dev enp59s0
+:> sudo ip link set dev enp59s0 {up|down}
+:> sudo ip neigh delete 10.18.51.3 dev enp59s0
+
+
+List other hosts on network
+:> arp -a
+:> ip neigh show
+
+
+Scan network for hosts
+:> instp nmap
+:> sudo nmap -sn 10.19.51.0/24
