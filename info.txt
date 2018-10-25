@@ -27,6 +27,13 @@ Unarchive .tar.gz
 :> tar -xzvf archive.tar.gz
 :> tar -xzvf archive.tar.gz -C DEST_FOLDER
 
+List 7z:
+:> 7z l archive.7z
+Extract here: [check out the 'e' option]
+:> 7z x archive.7z
+Extract into new dir:
+:> 7z x -oPATH archive.7z
+
 
 Powerdown
 [-P(default) === powerdown, -r === reboot]
@@ -349,15 +356,6 @@ Get existing mounts
 :> mount
 
 
-Libreoffice launch agruments
---version       Displays the version information.
---writer        Starts with an empty Writer document.
---calc          Starts with an empty Calc document.
---draw          Starts with an empty Draw document.
---impress       Starts with an empty Impress document.
---math          Starts with an empty Math document.
-
-
 Get binary number representation with Haskell
 ghci:> import Text.Printf
 ghci:> let a = 5207 in putStrLn $ printf "%d = %b" a a
@@ -433,9 +431,13 @@ Current loggen in users
 :> xargs
 
 
+Convert image format
+:> convert image.png image.jpg
+For .png with transparent background
+:> mogrify -format jpg -background black -flatten *.png
 Convert (merge) multiple PDFs into one (with ghostscript)
 :> gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=temp.pdf pdf1.pdf pdf2.pdf
-Convert (merge) multiple images into one (with img2pdf)
+Convert (merge) multiple images into one pdf (with img2pdf)
 :> img2pdf img1.png img2.jpg -o out.pdf
 Compress (could also convert) .jpg images to reduce size (and quality) with for-loop (in parallel??)
 :> for file in IMG*; do convert -strip -interlace Plane -gaussian-blur 0.05 -quality 30% $file "small_$file"; echo "$file"; done
@@ -533,3 +535,14 @@ iptables -A OUTPUT -m owner --gid-owner no-internet -j DROP
 Logout, Login in order for group changes to take affect
 Usage:
 :> no-internet "ping google.com"
+
+
+ehci and xhci, are USB standard interfaces for 2.0 and 3.0 respectively. ehci-pci or ehci_hcd is a Linux kernel driver for USB 2.0 handling, while xhci_hcd is the same for USB 3.0. ehci stands for Enhanced Host Controller Interface, xhci stands for eXtensible Host Controller Interface, while hcd stands for Host Controller Driver. They are low level things inside our Linux kernel.
+
+
+Find out what other IPs there are on the network
+:> sudo nmap -sn 192.168.1.0/24
+
+
+Repeat command periodically every 3 seconds
+:> watch -n 3 ip addr show

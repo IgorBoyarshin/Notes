@@ -102,3 +102,19 @@ Opening stuff adds indent, closing - doesn't.
 
 Reload .vimrc:
 :so ~/.vimrc
+
+
+Viewports (windows)
+:sp           === will split the Vim window horizontally. Can be written out entirely as :split.
+:vsp          === will split the Vim window vertically. Can be written out as :vsplit.
+Ctrl-w Ctrl-w === moves between Vim viewports.
+Ctrl-w j      === moves one viewport down.
+Ctrl-w k      === moves one viewport up.
+Ctrl-w h      === moves one viewport to the left.
+Ctrl-w l      === moves one viewport to the right.
+Ctrl-w =      === tells Vim to resize viewports to be of equal size.
+Ctrl-w -      === reduce active viewport by one line.
+Ctrl-w +      === increase active viewport by one line.
+Ctrl-w q      === will close the active window.
+Ctrl-w r      === will rotate windows to the right.
+Ctrl-w R      === will rotate windows to the left.

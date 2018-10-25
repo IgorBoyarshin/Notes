@@ -6,6 +6,8 @@
 * -----------------------------------------------------------------------------
 * ---------------- Manual
 * -----------------------------------------------------------------------------
+* [??] ffmpeg
+* :> ffmpeg -i input.mp4 output.webm
 
 * WPS languages
 * http://wps-community.org/download/dicts/
@@ -21,7 +23,6 @@
 
 
 * kdenlive
-* wps
 * lutris
 
 * wpa_supplicant
@@ -183,6 +184,15 @@ To fix not working after boot from suspend:
 * Needed for UEFI??
 
 # [pac] libreoffice-still
+* Libreoffice launch agruments
+* --version       Displays the version information.
+* --writer        Starts with an empty Writer document.
+* --calc          Starts with an empty Calc document.
+* --draw          Starts with an empty Draw document.
+* --impress       Starts with an empty Impress document.
+* --math          Starts with an empty Math document.
+
+
 
 # [pac] jdk8-openjdk
 * Consider later versions
@@ -205,6 +215,9 @@ To fix not working after boot from suspend:
 
 # [pac] unrar
 
+# [pac] p7zip
+* .7z archive
+
 # [pac] vlc
 * Requires qt4 for gui
 
@@ -215,6 +228,14 @@ To fix not working after boot from suspend:
 * Has "advanced ntfs"
 
 # [pac] krita
+
+# [pac] net-tools
+* For ifconfig
+
+# [pac] pinta
+
+# [pac] glade
+* GTK gui builder
 
 * Bluetooth
 * # [pac] bluez bluez-utils pulseaudio-bluetooth blueman
@@ -314,6 +335,8 @@ To fix not working after boot from suspend:
 * will be generated. And at the one more consequent start everything will work.
 
 # [pac] texlive-most
+# [pac] texlive-lang
+# [pac] texmaker
 * Latex
 ? [aur] wiki2beamer
 
@@ -327,6 +350,9 @@ To fix not working after boot from suspend:
 * -----------------------------------------------------------------------------
 
 ? [pac] cmatrix
+
+? [pac] nmap
+* :> sudo nmap -sn 192.168.1.0/24
 
 ? [pac] sl
 * Steam Locomotive
@@ -366,6 +392,8 @@ To fix not working after boot from suspend:
 
 # [aur] downgrader
 
+# [aur] slack-desktop
+
 # [aur] rar
 
 # [aur] tusk
@@ -379,6 +407,12 @@ To fix not working after boot from suspend:
 # [aur] imagemagick-full
 * Convert images, PDFs, etc.
 
+# [aur] wps-office
+* Launch:
+* wps === word
+* wpp === presentations
+* et === spreadsheet
+
 * -----------------------------------------------------------------------------
 
 ? [aur] edb-debugger
@@ -390,6 +424,9 @@ To fix not working after boot from suspend:
 * :> pipes
 
 ? [aur] nsnake
+
+? [aur] flashplayer-standalone
+* Play Flash player *.swf files
 
 ? [aur] vmware-workstation
 * Additional setup required (read arch wiki) (services and modprobe).

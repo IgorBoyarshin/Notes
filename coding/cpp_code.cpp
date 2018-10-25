@@ -104,8 +104,10 @@ const auto elapsedMillis = std::chrono::duration_cast<std::chrono::milliseconds>
 template<typename T = int>
 T getRandomUniformInt(T low, T high) {
     static std::random_device rd;
+    /* static std::seed_seq seed{1, 2, 3, 300}; */
+    /* static std::mt19937 e2(seed); */
     static std::mt19937 e2(rd());
-    static std::uniform_int_distribution<T> dist(low, high);
+    std::uniform_int_distribution<T> dist(low, high);
 
     return dist(e2);
 }
@@ -115,8 +117,10 @@ T getRandomUniformInt(T low, T high) {
 template<typename T = float>
 T getRandomUniformFloat(T low, T high) {
     static std::random_device rd;
+    /* static std::seed_seq seed{1, 2, 3, 300}; */
+    /* static std::mt19937 e2(seed); */
     static std::mt19937 e2(rd());
-    static std::uniform_real_distribution<T> dist(low, high);
+    std::uniform_real_distribution<T> dist(low, high);
 
     return dist(e2);
 }
@@ -158,3 +162,11 @@ void func(__attribute__((unused)) int x) {}
 // ----------------------------------------------------------------------------
 int buffer[5];
 memset(buffer, 0, 5 * sizeof(int))
+// ----------------------------------------------------------------------------
+// --------------- Print bits representation of a number
+// ----------------------------------------------------------------------------
+#include <bitset>
+
+int main() {
+    std::cout << std::bitset<8>(15) << std::endl;
+}

@@ -1,93 +1,18 @@
-# EVERYDAY
-# [remote] [branch]
-git push origin master
-
-# -u sets an upstream branch
-git push -u [remote-name] [local-branch-name]
-
-# [remote-name]
-git fetch origin
-
-# fetch and merge
-git pull origin
-
 # Be inside the branch you are merging into
 git merge feature
 git merge feature -m "message"
-
-# -a flag stages and then commits
-git commit -a -m ""
-
-
-# BRANCHING
-# Creating a new branch (from current position)
-git branch [branch name]
-
-# Switch branches
-git checkout [branch name]
-
-# Create a new branch and switch to it
-git checkout -b [branch name]
-
-# .. and tracks it from the origin
-git checkout -b serverfix origin/serverfix
-# ===
-git checkout --track origin/serverfix
-# IF (a) doesn’t exist and (b) exactly matches a name on only one remote
-git checkout serverfix
 
 # To create a new branch and add it to the remote:
 git checkout -b newbranch
 git push -u origin newbranch
 
-# Delete branch
-git branch -d [branch name]
-
-# Set upstream branch
-git branch -u origin/serverfix
-
-# List tracking branches
-git branch -vv
-
 # Delete remote branch
 git push origin --delete serverfix
-
-# List all branches
-git branch
-
-# List last commit on each branch
-git branch -v
 
 # List remote branches
 git ls-remote [remote]
 
-
-# DEALING WITH CONFLICTS WHILE MERGINS
-# To check status
-git status
-
-# Having resolved the conflicts
-git add [file]
-
-# To finish merging
-git commit # ??
-
-
-# REMOVE STAGED FILES
-# Remove from staging area
-git rm --cached [file]
-
-# .. and from the disk
-git rm [file]
-
-
-# OTHER
 git config --global credential.helper cache
-
-git log --oneline --decorate --graph --all
-
-git clone <url>
-
 -------------------------------------------------------------------------------
 Fix wrong commit message
 :> git commit --amend
@@ -101,3 +26,12 @@ Undo commit
 
 Reser (revert) to commit
 :> git reset --hard HEAD
+
+
+git log --oneline --decorate --graph --all
+git log --oneline --decorate --graph --all --reflog --pretty=format:%h %s%d (by %an %cr)
+
+
+Clear reflog
+git reflog expire --expire-unreachable=now --all
+git gc --prune=now

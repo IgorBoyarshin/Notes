@@ -61,3 +61,11 @@ no-internet "plog-converter -a GA:1,2 -t tasklist ./PVS-Studio.log"
 
 // This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+// ----------------------------------------------------------------------------
+// ---------------- Reference to array
+// ----------------------------------------------------------------------------
+// return size of an array as a compile-time constant. (The
+// array parameter has no name, because we care only about
+// the number of elements it contains.)
+template<typename T, std::size_t N>
+constexpr std::size_t arraySize(T (&)[N]) noexcept { return N; }
