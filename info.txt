@@ -546,3 +546,15 @@ Find out what other IPs there are on the network
 
 Repeat command periodically every 3 seconds
 :> watch -n 3 ip addr show
+
+
+Clear terminal mess after using ncurses
+:> stty sane
+OR maybe
+:> reset
+if the first one didn't do the job.
+Might need to use Ctrl+j instead of <CR>
+
+
+Check current kernel BOOT parameters
+:> cat /proc/cmdline

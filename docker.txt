@@ -1,0 +1,64 @@
+ARCH setup:
+
+- Add kernel parameter:
+:> vim /etc/default/grub
+{
+    ...
+    GRUB_CMDLINE_LINUX_DEFAULT="... vsyscall=emulate"
+    ...
+}
+:> grub-mkconfig -o /boot/grub/grub.cfg
+:> reboot
+
+- Resolve error with dpkg (invalid cross-device link):
+:> echo N | sudo tee /sys/module/overlay/parameters/metacopy
+(OR with kernel parameter (refer to arch wiki:docker))
+
+- Install docker
+:> instp docker
+:> ... enable docker.service
+:> ... start docker.service
+To verify:
+:> sudo docker info
+
+
+
+
+Build image:
+:> sdocker build -t main-image .
+
+Run image:
+:> sdocker run -it main-image
+
+List images:
+:> sdocker images
+
+Remove all containers:
+:> sdocker rm $(sdocker ps -a -q)
+
+Clean everything:
+:> docker system prune -a
+
+
+
+===================
+Compile:
+ARCH
+:> sdocker build -t hangman-compile-archlinux -f docker/compile-archlinux/Dockerfile .
+:> sdocker run -v ~/Stuff/dev/Cpp/Hangman/out:/mnt/host -it hangman-compile-archlinux
+UBUNTU
+:> sdocker build -t hangman-ubuntu-archlinux -f docker/compile-ubuntu/Dockerfile .
+:> sdocker run -v ~/Stuff/dev/Cpp/Hangman/out:/mnt/host -it hangman-compile-ubuntu
+
+Run:
+UBUNTU
+:> sdocker build -t hangman-run-ubuntu -f docker/run/Dockerfile .
+:> sdocker run -it hangman-run-ubuntu
+ARCH
+:> sdocker build -t hangman-run-archlinux -f docker/run/Dockerfile .
+:> sdocker run -it hangman-run-archlinux
+
+
+UBUNTU
+iputils-ping
+net-tools

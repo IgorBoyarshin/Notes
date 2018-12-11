@@ -170,3 +170,23 @@ memset(buffer, 0, 5 * sizeof(int))
 int main() {
     std::cout << std::bitset<8>(15) << std::endl;
 }
+// ----------------------------------------------------------------------------
+// --------------- Wait for all children that the process has to finish
+// ----------------------------------------------------------------------------
+while (waitpid(-1, NULL, 0)) if (errno == ECHILD) break;
+// ----------------------------------------------------------------------------
+// --------------- Enum
+// ----------------------------------------------------------------------------
+struct MouseButton {
+    enum Value {
+        Left, Middle, Right
+    };
+};
+
+void handleMouseButton( MouseButton::Value b ) {
+    switch ( b ) {
+        case MouseButton::Left:   // ...
+        case MouseButton::Middle: // ...
+        case MouseButton::Right:  // ...
+    }
+}

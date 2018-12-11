@@ -6,8 +6,12 @@ Create a new partition for experiments (let /dev/sda5)
 :> sudo targetcli
 > cd /backstores/block
 > create mydisk /dev/sda5
+OR
+> cd /backstores/ramdisk
+> create name=mysidk size=1GB
+
 > cd /iscsi
-> create iqn.2018-08.com.igorek:server
+> create iqn.2018-10.com.igorek:server
 > cd iscsi/iqn...:server/tpg1/acls
 > create iqn.2018-10.com.igorek:client
 > cd iscsi/iqn...:server/tpg1/luns
@@ -26,12 +30,14 @@ Create a new partition for experiments (let /dev/sda5)
 
 INITIATOR
 :> instp open-iscsi
+:> sudo systemctl stop open-iscsid.service
 :> sudo systemctl start open-iscsi.service
+:> sudo systemctl start open-iscsid.service
 :> vim /etc/iscsi/initiatorname.iscsi
 {
 InitiatorName=iqn.2018-10.com.igorek:client
 }
-:> sudo iscsiadm --mode dicsovery -t st -p 0.0.0.0:3260
+:> sudo iscsiadm --mode discovery -t st -p 0.0.0.0:3260
 :> sudo iscsiadm -m node --targetname=iqn.2018-10.com.igorek:server --login
 (:> iscsiadm -m node -U all) to logout
 View current sessions:

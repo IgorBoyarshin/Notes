@@ -7,6 +7,7 @@
 * ---------------- Manual
 * -----------------------------------------------------------------------------
 * [??] ffmpeg
+* Convert audio or video files
 * :> ffmpeg -i input.mp4 output.webm
 
 * WPS languages
@@ -176,6 +177,8 @@ To fix not working after boot from suspend:
 * :> optirun -b none nvidia-settings -c :8
 * (First install:)
 * # [pac] nvidia-settings
+
+
 * -----------------------------------------------------------------------------
 * ---------------- Pacman
 * -----------------------------------------------------------------------------
@@ -212,6 +215,11 @@ To fix not working after boot from suspend:
 * :> sudo systemctl enable sshd.service
 
 # [pac] unzip
+
+# [pac] python-pip
+
+# [pac] tk
+* Becomes needed at some stage
 
 # [pac] unrar
 
@@ -311,7 +319,17 @@ To fix not working after boot from suspend:
 * To copy the default config:
 * :> ranger --copy-config=all
 
-# [pac] mupdf
+* # [pac] mupdf
+
+# [pac] zathura zathura-pdf-mupdf zathura-djvu
+
+# [pac] perl-file-mimeinfo
+* Find out mime type:
+* :> mimetype <file>
+* Set default:
+* :> mimeopen -d <file>
+* Open with default:
+* :> mimeopen -n <file>
 
 # [pac] evince-no-gnome
 
@@ -350,6 +368,9 @@ To fix not working after boot from suspend:
 * -----------------------------------------------------------------------------
 
 ? [pac] cmatrix
+
+? [pac] sourcetrail
+* Visualizes C++ codebase
 
 ? [pac] nmap
 * :> sudo nmap -sn 192.168.1.0/24
