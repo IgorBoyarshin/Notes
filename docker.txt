@@ -37,7 +37,7 @@ Remove all containers:
 :> sdocker rm $(sdocker ps -a -q)
 
 Clean everything:
-:> docker system prune -a
+:> sdocker system prune -a
 
 
 

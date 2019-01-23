@@ -19,7 +19,7 @@ List:
 List .tar
 :> tar -tvf archive.tar
 -t === list contents
--v === vervbose
+-v === verbose
 -f === specify file
 For .tar.gz add:
 -z === griz the file first
@@ -558,3 +558,16 @@ Might need to use Ctrl+j instead of <CR>
 
 Check current kernel BOOT parameters
 :> cat /proc/cmdline
+
+
+PulseAudio, pavucontrol, pactl
+[~/.config/pulse/default.pa]
+:> pactl list sinks [short]
+:> pactl set-sink-volume @DEFAULT_SINK@ -5%
+:> pactl set-sink-mute @DEFAULT_SINK@ toggle
+:> pactl load-module module-switch-on-connect
+
+
+In order to recompile and restart xmonad:
+:> ~/.xmonad/build
+[WIN+q]

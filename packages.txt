@@ -96,6 +96,10 @@
 * }
 * :> chmod a+x build
 *
+* In order to recompile and restart xmonad:
+* :> ~/.xmonad/build
+* [WIN+q]
+*
 * Every time you update (with "git pull") the three downloaded repositories:
 * :> stack install
 * May first need to do if added a new flag or dependency:
@@ -253,6 +257,8 @@ To fix not working after boot from suspend:
 * Make sure you are in the "lp" group
 * To use, run:
 * :> blueman-manager
+* May need:
+* :> instp dbus-python
 
 # [pac] wget
 
@@ -286,6 +292,9 @@ To fix not working after boot from suspend:
 
 # [pac] rsync
 
+# [aur] bombermaaan
+* game
+
 # [pac] w3m
 
 # [pac] ttf-croscore
@@ -297,8 +306,20 @@ To fix not working after boot from suspend:
 # [pac] nomacs
 * Image viewer
 
+# [pac] sxiv
+* Image viewer
+* Read arch wiki
+* Install script from https://raw.githubusercontent.com/ranger/ranger/master/examples/rifle_sxiv.sh
+
 # [pac] feh
 * ~/.fehbg
+
+# [pac] redshift
+* Ranges from 1000 25000
+* Natural temperature = 6500
+* :> redshift -P -O 2500
+* Reset to default:
+* :> redshift -x
 
 # [pac] scrot
 * Screenshots
@@ -318,6 +339,10 @@ To fix not working after boot from suspend:
 # [pac] ranger
 * To copy the default config:
 * :> ranger --copy-config=all
+
+# [pac] nnn
+# [aur] vidir
+
 
 * # [pac] mupdf
 
@@ -400,6 +425,13 @@ To fix not working after boot from suspend:
 ? [pac] rofi
 * Instead of dmenu
 
+? [pac] arduino
+? [pac] arduino-avr-core
+* load the cdc_acm module.
+* add self to groups:
+* :> gpasswd -a $USER uucp
+* :> gpasswd -a $USER lock
+
 * -----------------------------------------------------------------------------
 
 % [pac] mirage
@@ -443,6 +475,9 @@ To fix not working after boot from suspend:
 
 ? [aur] bash-pipes
 * :> pipes
+
+? [aur] bombermaaan
+* game
 
 ? [aur] nsnake
 

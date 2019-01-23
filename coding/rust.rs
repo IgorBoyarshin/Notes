@@ -15,3 +15,7 @@ Can run:
 
 rustup component add clippy-preview
 cargo clippy
+
+
+Specify function (lambda) type:
+let sum = ratio.iter().sum::<u32>() as f32;
