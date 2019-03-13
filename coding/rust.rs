@@ -19,3 +19,12 @@ cargo clippy
 
 Specify function (lambda) type:
 let sum = ratio.iter().sum::<u32>() as f32;
+
+
+Redirect stderr
+cargo run 2> /path/to/log.txt
+
+
+Allow non-snake-case
+#[allow(non_snake_case)]
+let N = signal.len();

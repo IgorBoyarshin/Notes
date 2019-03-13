@@ -1,0 +1,2 @@
+Change blue into red
+:> convert input.png -fill red -opaque blue output.png

@@ -150,7 +150,7 @@ LightDM:
 -------------------------------- mirrorlist for pacman
 vim /etc/pacman.d/mirrorlist
 [from browser: arch generate new mnirrorlist. replace the mirrorlist file]
-:> sudo pacman -Syyy   [regenerate] 
+:> sudo pacman -Syyy   [regenerate]
 ------- NTP
 :> pacman -S ntp
 :> systemctl daemon-reload

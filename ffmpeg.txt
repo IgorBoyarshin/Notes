@@ -1,0 +1,2 @@
+Cut starting from _ with duration _ second:
+:> ffmpeg -ss <start> -t <duration> -i input.mp3 output.mp3

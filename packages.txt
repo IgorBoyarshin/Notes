@@ -1,3 +1,10 @@
+* To check out:
+* master pdf editor
+* audacity
+* kdnlive
+* calligra sheets
+* freecad
+
 * Lines starting with (*) are comments.
 * (#) [pac|aur] <package> === package to install.
 * (?) [pac|aur] <package> === potential package, don't install them in the main batch.
@@ -230,6 +237,9 @@ To fix not working after boot from suspend:
 # [pac] p7zip
 * .7z archive
 
+# [pac] perf
+* perf stat
+
 # [pac] vlc
 * Requires qt4 for gui
 
@@ -246,7 +256,7 @@ To fix not working after boot from suspend:
 
 # [pac] pinta
 
-# [pac] glade
+? [pac] glade
 * GTK gui builder
 
 * Bluetooth
@@ -288,7 +298,11 @@ To fix not working after boot from suspend:
 # [pac] easytag
 * Change metadata of audio (music) files.
 
-# [pac] gtypist
+? [pac] gtypist
+
+# [pac] mlocate
+* After install:
+* :> sudo updatedb
 
 # [pac] rsync
 
@@ -313,6 +327,10 @@ To fix not working after boot from suspend:
 
 # [pac] feh
 * ~/.fehbg
+
+# [pac] pv
+* Measure the throughput of a program
+* :> program | pv | out.txt
 
 # [pac] redshift
 * Ranges from 1000 25000
@@ -340,7 +358,7 @@ To fix not working after boot from suspend:
 * To copy the default config:
 * :> ranger --copy-config=all
 
-# [pac] nnn
+? [pac] nnn
 # [aur] vidir
 
 
@@ -356,7 +374,7 @@ To fix not working after boot from suspend:
 * Open with default:
 * :> mimeopen -n <file>
 
-# [pac] evince-no-gnome
+? [pac] evince-no-gnome
 
 # [pac] djview
 
@@ -393,6 +411,9 @@ To fix not working after boot from suspend:
 * -----------------------------------------------------------------------------
 
 ? [pac] cmatrix
+
+? [pac] glances
+* htop alternative written in python
 
 ? [pac] sourcetrail
 * Visualizes C++ codebase
@@ -445,7 +466,7 @@ To fix not working after boot from suspend:
 
 # [aur] downgrader
 
-# [aur] slack-desktop
+? [aur] slack-desktop
 
 # [aur] rar
 
@@ -468,10 +489,15 @@ To fix not working after boot from suspend:
 
 * -----------------------------------------------------------------------------
 
+? [aur] plplot
+* Library for C++ plotting, drawing
+
 ? [aur] edb-debugger
 * Disassembler and debugger, similar to OllyDbg
 
 ? [aur] st
+
+? [aur] sublime-text2
 
 ? [aur] bash-pipes
 * :> pipes
@@ -508,3 +534,21 @@ To fix not working after boot from suspend:
 * :> trizen -S ttf-consolas-powerline
 * For special glyphs:
 * :> pacman -S ttf-freefont
+* -----------------------------------------------------------------------------
+* ---------------- Android
+* -----------------------------------------------------------------------------
+* [aur] android-studio
+* Slow
+*
+* [pac] libmtp
+* Maybe
+
+* [aur] android-udev
+* Maybe
+
+* [pac] android-tools
+* Fast
+*
+* [aur] android-sdk-dummy
+* [aur] android-sdk-build-tools-dummy
+* [aur] android-sdk-platform-tools-dummy

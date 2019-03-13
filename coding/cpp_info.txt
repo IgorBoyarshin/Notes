@@ -56,8 +56,8 @@ you want to limit to the current file.
 // ---------------- PVS-studio
 // ----------------------------------------------------------------------------
 no-internet "pvs-studio-analyzer trace -- make"
-no-internet "pvs-studio-analyzer analyze"
-no-internet "plog-converter -a GA:1,2 -t tasklist ./PVS-Studio.log"
+no-internet "pvs-studio-analyzer analyze -o out.log"
+no-internet "plog-converter -a GA:1,2 -t tasklist out.log"
 
 // This is an independent project of an individual developer. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
@@ -69,3 +69,63 @@ no-internet "plog-converter -a GA:1,2 -t tasklist ./PVS-Studio.log"
 // the number of elements it contains.)
 template<typename T, std::size_t N>
 constexpr std::size_t arraySize(T (&)[N]) noexcept { return N; }
+// ----------------------------------------------------------------------------
+// ---------------- Special ASCII characters (symbols) codes and representation
+// ----------------------------------------------------------------------------
+Control characters:
+
+(Hex codes assume an ASCII-compatible character encoding.)
+
+\a = \x07 = alert (bell)
+\b = \x08 = backspace
+\t = \x09 = horizonal tab
+\n = \x0A = newline (or line feed)
+\v = \x0B = vertical tab
+\f = \x0C = form feed
+\r = \x0D = carriage return
+\e = \x1B = escape (non-standard GCC extension)
+Punctuation characters:
+
+\" = quotation mark (backslash not required for '"')
+\' = apostrophe (backslash not required for "'")
+\? = question mark (used to avoid trigraphs)
+\\ = backslash
+Numeric character references:
+
+\ + up to 3 octal digits
+\x + any number of hex digits
+\u + 4 hex digits (Unicode BMP, new in C++11)
+\U + 8 hex digits (Unicode astral planes, new in C++11)
+\0 = \00 = \000 = octal ecape for null character
+
+If you do want an actual digit character after a \0, then yes, I recommend string concatenation. Note that the whitespace between the parts of the literal is optional, so you can write "\0""0".
+// ----------------------------------------------------------------------------
+// ---------------- Address sanitizer
+// ----------------------------------------------------------------------------
+(Both compiler and linker flag)
+-fsanitize=address
+
+On average, the instrumentation increases processing time by about 73% and memory usage by 340%
+
+Also:
+-fsanitize-address-use-after-scope
+// ----------------------------------------------------------------------------
+// ---------------- new int[5] vs new int[5]()
+// ----------------------------------------------------------------------------
+With the parenthesis, the arrays elements are default initialized. Without, they are uninitialized.
+// ----------------------------------------------------------------------------
+// ---------------- Numbers' suffixes
+// ----------------------------------------------------------------------------
+1U   => unsigned int
+1L   => long
+1UL  => unsigned long
+1ULL => unsigned long long
+1LL  => long long
+// ----------------------------------------------------------------------------
+// ---------------- Access modifier for class inheritance
+// ----------------------------------------------------------------------------
+           | Derived public | Derived protected | Derived private
+Base class |                |                   |
+Public     |     public     |     protected     |     private
+Protected  |    protected   |     protected     |     private
+Private    |  not inherited |   not inherited   |   not inherited
