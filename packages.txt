@@ -299,7 +299,7 @@ To fix not working after boot from suspend:
 # [pac] nasm
 * For Assembly.
 
-# [pac] cmus
+? [pac] cmus
 * Alternative backup music player.
 
 # [pac] easytag
@@ -415,6 +415,15 @@ To fix not working after boot from suspend:
 
 # [pac] img2pdf
 
+# [pac] fzf
+* Put into .zshrc:
+* export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+* -e === exact match
+
+# [pac] the_silver_searcher
+* :> ag --hidden --ignore .git -g ""
+* (-g to search for filenames, not contents)
+
 # [pac] dosfstools
 * Additional format types for mkfs: VFAT, MSDOS
 # [pac] ntfsprogs
@@ -439,6 +448,8 @@ To fix not working after boot from suspend:
 
 ? [pac] sl
 * Steam Locomotive
+
+? [pac] fzf
 
 ? [pac] gcc-ada
 
