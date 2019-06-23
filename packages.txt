@@ -250,14 +250,21 @@ To fix not working after boot from suspend:
 * Has "advanced ntfs"
 
 # [pac] krita
+* Advanced image editor (vector)
 
 # [pac] net-tools
 * For ifconfig
 
 # [pac] pinta
+* Simple image editor
 
 ? [pac] glade
 * GTK gui builder
+
+? [pac] lm_sensors
+* Display temperature of CPU, GPU etc
+* :> sudo sensors-detect
+* :> sensors
 
 * Bluetooth
 * # [pac] bluez bluez-utils pulseaudio-bluetooth blueman
@@ -338,6 +345,8 @@ To fix not working after boot from suspend:
 * :> redshift -P -O 2500
 * Reset to default:
 * :> redshift -x
+* Change gamma (values from 0.1 to 10, 1 is default (neutral)):
+* :> redshift -P -O 6500 -g 1:1:1
 
 # [pac] scrot
 * Screenshots
@@ -378,6 +387,9 @@ To fix not working after boot from suspend:
 
 # [pac] djview
 
+# [pac] kdenlive
+* Video editing and processing (replacing Adobe Premiere Pro)
+
 # [pac] alsa-utils
 # [pac] pulseaudio
 # [pac] ncmpcpp
@@ -411,6 +423,10 @@ To fix not working after boot from suspend:
 * -----------------------------------------------------------------------------
 
 ? [pac] cmatrix
+
+? [pac] pacgraph
+* Print disk memory usage by installed programs (-c for console mode):
+* :> pacgraph -c
 
 ? [pac] glances
 * htop alternative written in python

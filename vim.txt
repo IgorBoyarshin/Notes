@@ -60,8 +60,8 @@ tags: it, at
 
 
 REGISTERS
-<Ctrl+r><reg> - paste contents of <reg>.
-<Ctrl+r>0 - paste just yanked text(Insert mode).
+<Ctrl+r><reg> - paste contents of <reg> while in insert mode.
+<Ctrl+r>0 - paste just yanked text (Insert mode).
 :reg - list them all.
 " - Noname buffer - last ??.
 _ - Blackhole buffer.
@@ -97,7 +97,7 @@ Add: ys<where><what>
 In Visual Mode: S<what>
 
 Possible surround targets: (), {}, {}, <>, "", '', w, t, p, s.
-Opening stuff adds indent, closing - doesn't.
+Opening things add indent, closing - don't.
 
 
 Reload .vimrc:
@@ -105,8 +105,8 @@ Reload .vimrc:
 
 
 Viewports (windows)
-:sp           === will split the Vim window horizontally. Can be written out entirely as :split.
-:vsp          === will split the Vim window vertically. Can be written out as :vsplit.
+:sp (:split)  === will split the Vim window horizontally.
+:vsp(:vsplit) === will split the Vim window vertically.
 Ctrl-w Ctrl-w === moves between Vim viewports.
 Ctrl-w j      === moves one viewport down.
 Ctrl-w k      === moves one viewport up.

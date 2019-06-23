@@ -1,0 +1,10 @@
+perf stat ./main
+
+perf record ./main
+perf report
+
+perf record -g ./main
+perf report -g
+OR
+perf report -g 'graph,0.5,caller'
+!!! Use with flag: -fno-omit-frame-pointer ---- to orient yourself in stack !!!
