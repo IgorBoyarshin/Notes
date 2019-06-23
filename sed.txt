@@ -1,0 +1,50 @@
+Copy next line into pattern-space.
+Operate commands within '' on it.
+Print result (by default. -n removes this  default behaviour)
+
+'p' === explicitly print
+'d' === delete. All commands after d are ignored
+'=' === print current line number
+'n' === explicitly go to next line, doing the default implicit print if not specified otherwise (remaining at the same place within the command)
+'N' === pull the next line into the pattern-space
+'P' === print the first line of the pattern-space
+'P' === delete the first line of the pattern-space
+
+Separate with ;
+Ranges are like if-statements
+
+q === exit
+r <file> === dump from file
+w <file> === write to file
+a <stuff> === append (after) stuff as a line
+i <stuff> === insert (before) stuff as a line
+c <stuff> === change  stuff as a line
+
+EX:
+sed '2aSTUFF'
+
+SUBSTITUTION
+Flags:
+p === print the lines where the substitution took place
+I === ignore case
+w <file> === write to file the lines where the substitution took place
+
+'s/old/new/'
+'2,3s/old/new/'
+'2,3 {s/old/new/; p}'
+
+
+Character substitution (at corresponding positions)
+Ex:
+:> y/ab/cd/
+=ab= -> =cd=
+
+
+HOLD-SPACE
+Has an empty line per cycle by default
+
+x === excnahge with pattern-space
+h === (hold) put and replace into hold-space from pattern-space
+g === (get) retrieve from hold-space replace into pattern-space
+H === same as h, but append
+G === same as g, but append
