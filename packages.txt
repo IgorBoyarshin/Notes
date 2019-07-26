@@ -191,6 +191,24 @@ To fix not working after boot from suspend:
 
 
 * -----------------------------------------------------------------------------
+* ---------------- Thematic
+* -----------------------------------------------------------------------------
+* The right way to install (Node, npm) using NVM:
+* :> instt nvm
+* :> nvm install node
+
+* Angular & Bootstrap
+? [aur] angular-cli
+* !!!nodejs!!!
+* :> npm install -g @angular/cli@latest
+* :> ng new app-name
+* :> ng serve
+* :> npm install --save bootstrap@3
+* (and add into angular.json:
+    into styles:
+    "node_modules/bootstrap/dist/css/bootstrap.min.css",
+)
+* -----------------------------------------------------------------------------
 * ---------------- Pacman
 * -----------------------------------------------------------------------------
 
@@ -491,6 +509,9 @@ To fix not working after boot from suspend:
 * ---------------- AUR
 * -----------------------------------------------------------------------------
 
+? [aur] nodejs-tern
+* For Javascript (JS) deoplete autocompletion
+
 # [aur] downgrader
 
 ? [aur] slack-desktop
@@ -502,11 +523,25 @@ To fix not working after boot from suspend:
 
 # [aur] ttf-wps-fonts
 
+? [aur] udemy-dl-git
+* To download courses from udemy
+* Will create a subfolder:
+* :> udemy-dl <URL> --skip-sub
+* Flag --skip-sub
+
 # [aur] ttf-ms-fonts
 * Fonts: Times New Romans and co.
 
 # [aur] imagemagick-full
 * Convert images, PDFs, etc.
+* Rotate images
+* :> for file in /tmp/p/DSC*.JPG; do
+* :> convert "$file" -rotate 90 "${file%.JPG}"_rotated.JPG
+* :> done
+* OR
+* :> for photo in *.jpg ; do convert $photo -rotate 90 $photo ; done
+* OR
+* :> mogrify -rotate 90 *.jpg
 
 # [aur] wps-office
 * Launch:
@@ -528,6 +563,9 @@ To fix not working after boot from suspend:
 
 ? [aur] bash-pipes
 * :> pipes
+
+? [aur] postman
+* Inspect http endpoint API requests
 
 ? [aur] bombermaaan
 * game

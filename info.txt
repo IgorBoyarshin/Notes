@@ -60,11 +60,13 @@ brightness - set by user, current value
 
 Search the filesystem
 :> grep -rnw 'PATH' -e 'PATTERN'
+:> grep -rni . -e 'PATTERN'
 -R === recursive. Traverse the whole tree, follow symlinks
 -r === recursive. Traverse the whole tree, dont' follow symlinks
 -n === show line numbers
 -w === match the whole word
 -l === don't show the matches, just show file names
+-i === ignore case
 --include=\*.{c,h}
 --exclude=*.o
 --exclude-dir={dir1,dir2,*.dst}
@@ -633,3 +635,28 @@ To modify the output resolution:
 Cut video with ffmpeg
 (-t for duration. Timestamps are either in seconds (sec.ms) or full)
 :> ffmpeg -ss 01:38:09.0 -i input.mp4 -c copy -t 65 out.mkv
+
+For loop:
+:> for subt in *.srt; do mv $subt "._$subt"; done
+
+
+Get you IP address as seen from the internet
+:> curl -4 icanhazip.com
+
+
+Possible fix for ssh remote connection hang
+1) -X flag at the end [probably set by the first setting]
+2) .ssh/config:
+ForwardX11 yes
+ServerAliveInterval 15
+ServerAliveCountMax 3
+
+
+Pacman (and trizen AUR) parallel compilation
+[/etc/makepkg.conf]
+MAKEFLAGS="-j8"
+
+
+Connect to Amazon AWS via ssh
+:> ssh -i "~/Stuff/igorek-keypair.pem" ubuntu@ec2-52-58-254-176.eu-central-1.compute.amazonaws.com -X
+* Flag -X to prevent freezing

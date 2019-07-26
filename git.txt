@@ -35,3 +35,11 @@ git log --oneline --decorate --graph --all --reflog --pretty=format:%h %s%d (by 
 Clear reflog
 git reflog expire --expire-unreachable=now --all
 git gc --prune=now
+-------------------------------------------------------------------------------
+If you want to merge project-a into project-b:
+
+cd path/to/project-b
+git remote add project-a path/to/project-a
+git fetch project-a --tags
+git merge --allow-unrelated-histories project-a/master # or whichever branch you want to merge
+git remote remove project-a

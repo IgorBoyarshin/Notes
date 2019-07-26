@@ -1,0 +1,13 @@
+Check syntax
+:> sudo nginx -t
+
+Restart (reload) nginx
+:> sudo systemctl restart nginx
+
+/etc/nginx/sites-available/NAME
+
+/etc/nginx/nginx.conf
+
+Default web-page:
+/var/www/html
+/var/www/NAME/html
