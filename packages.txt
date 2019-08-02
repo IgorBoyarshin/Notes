@@ -350,6 +350,13 @@ To fix not working after boot from suspend:
 * Read arch wiki
 * Install script from https://raw.githubusercontent.com/ranger/ranger/master/examples/rifle_sxiv.sh
 
+# [pac] meld
+* Git compare commits and files tool
+* Setup:
+* :> git config --global diff.tool meld
+* :> git difftool -d old_commit..new_commit
+* (-d is for --dir-diff)
+
 # [pac] feh
 * ~/.fehbg
 
@@ -409,6 +416,8 @@ To fix not working after boot from suspend:
 * Video editing and processing (replacing Adobe Premiere Pro)
 
 # [pac] alsa-utils
+* /etc/modprob.d/alsa-base.conf:
+*     options snd_hda_intel index=0 model=dell-headset-multi
 # [pac] pulseaudio
 # [pac] ncmpcpp
 # [pac] mpc
@@ -490,6 +499,9 @@ To fix not working after boot from suspend:
 
 ? [pac] rofi
 * Instead of dmenu
+
+? [pac] skypeforlinux-stable-bin
+* ~/.fehbg
 
 ? [pac] arduino
 ? [pac] arduino-avr-core

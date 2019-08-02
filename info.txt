@@ -636,6 +636,7 @@ Cut video with ffmpeg
 (-t for duration. Timestamps are either in seconds (sec.ms) or full)
 :> ffmpeg -ss 01:38:09.0 -i input.mp4 -c copy -t 65 out.mkv
 
+
 For loop:
 :> for subt in *.srt; do mv $subt "._$subt"; done
 
@@ -660,3 +661,21 @@ MAKEFLAGS="-j8"
 Connect to Amazon AWS via ssh
 :> ssh -i "~/Stuff/igorek-keypair.pem" ubuntu@ec2-52-58-254-176.eu-central-1.compute.amazonaws.com -X
 * Flag -X to prevent freezing
+
+
+Audio, Alsa, Pavucontrol, Pactl
+Real-time echo:
+:> pactl load-module module-loopback
+:> pactl unload-module module-loopback
+(Is shown in pavucontrol in the Playback tab)
+
+After reboot, try:
+:> alsactl restore
+to unmute.
+
+
+In other words volatile registers are caller saved registers, as opposed to callee saved
+
+
+Display webcam video
+:> mpv /dev/video0

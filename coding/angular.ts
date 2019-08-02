@@ -306,6 +306,32 @@ export class ComponentB {
     }
 }
 ==============================================================================;
+// Parent:
+import { Subject } from 'rxjs';
+private displayEditedEntry: Subject<WordEntry> = new Subject<WordEntry>();
+emitToChild() {
+    this.displayEditedEntry.next(entry);
+}
+
+<edited-word-entry
+    [events]="displayEditedEntry.asObservable()"
+</edited-word-entry>
+// Child:
+import { Observable } from 'rxjs';
+
+private displayEntrySubscription: any;
+@Input() events: Observable<WordEntry>;
+
+ngOnInit() {
+    this.displayEntrySubscription = this.events.subscribe((entry: WordEntry) => {
+        // stuff
+    });
+}
+
+ngOnDestroy() {
+    this.displayEntrySubscription.unsubscribe();
+}
+==============================================================================;
 =============================== Forms ========================================;
 ==============================================================================;
 <form (ngSubmit)="onSubmit(f)" #f="ngForm">
@@ -486,7 +512,7 @@ anumations: [
         // OR
         transition('normal <=> highlighted', animate(300)),
     ]),
-    trigger('woldState', [
+    trigger('wildState', [
         state('normal', style({
             'background-color': 'red',
             transform: 'translateX(0) scale(1)'
@@ -542,7 +568,7 @@ anumations: [
                 transform: 'translateX(-100px)'
             })
             animate(300),
-        ]), 
+        ]),
         transition('* => void', [
             animate(300, style({
                 opacity: 0,
@@ -581,7 +607,7 @@ anumations: [
                     offset: 1,
                 }),
             ])),
-        ]), 
+        ]),
         transition('* => void', [
             animate(300, style({
                 opacity: 0,
@@ -598,12 +624,12 @@ export class AppComponent {
 // Now in code somewhere toggle the _state variable content.
 
 // ... in html:
-<li [@lsit1] (click)="onDelete()">
+<li [@list1] (click)="onDelete()">
 </li>;
 ==============================================================================;
 // Group (to make them run in parallel)
 transition('* => void', [
-    group([ // To make them 
+    group([ // To make them
         animate(300, style({
             color: 'red',
         })),
