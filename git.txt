@@ -29,7 +29,7 @@ Reser (revert) to commit
 
 
 git log --oneline --decorate --graph --all
-git log --oneline --decorate --graph --all --reflog --pretty=format:%h %s%d (by %an %cr)
+git log --oneline --decorate --graph --all --reflog --pretty=format:"%h %s%d (by %an %cr)"
 
 
 Clear reflog
@@ -46,3 +46,6 @@ git remote remove project-a
 -------------------------------------------------------------------------------
 git d HEAD^ HEAD
 :qa
+
+Using meld:
+git difftool --dir-diff old..new

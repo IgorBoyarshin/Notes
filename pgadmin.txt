@@ -1,0 +1,16 @@
+Create Server:
+    General:
+        Name: UbuntuDatabase (to use in pgAdmin view)
+    Connection:
+        Host name/address: localhost (on AWS the database is server at localhost)
+        Port: 5432
+        Maintenance database: linguanator (which db to set at main)
+        Username: postgres
+        Password: myPostgresPassword
+    SSH Tunnel:
+        Use: Yes
+        Tunnel host: ec2-52-58-254-176.eu-central-1.compute.amazonaws.com
+        Tunnel port: 22
+        Username: ubuntu
+        Authentication: Identity file
+        Identity file: <path to .pem file>

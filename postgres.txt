@@ -3,3 +3,6 @@ sudo apt install postgresql postgresql-contrib
 
 sudo -u postgres psql
 \q
+
+
+pgAdmin arch password: some98

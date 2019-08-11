@@ -239,6 +239,9 @@ To fix not working after boot from suspend:
 
 # [pac] zip
 
+? [pac] pgadmin4
+* PostgreSQL database web client
+
 * SSH
 # [pac] openssh
 * :> sudo systemctl enable sshd.service
