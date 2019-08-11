@@ -3,6 +3,18 @@ sudo apt install postgresql postgresql-contrib
 
 sudo -u postgres psql
 \q
+pgAdmin arch password: <usual secondary>
+
+\conninfo
+\l === list all databases
+\d === list all tables
+\d <table> === describe <table>
+\dt === list only tables
+\connect <database> === (\c) switch current database
+create database <NAME>;
 
 
-pgAdmin arch password: some98
+Password for role postgres:
+myPostgresPassword
+
+ALTER USER postgres with password 'myPostgresPassword';
