@@ -3,6 +3,7 @@ myPostgresPassword
 
 
 sudo apt install postgresql postgresql-contrib
+npm install pg
 
 
 sudo -u postgres psql
@@ -22,3 +23,15 @@ Password for role postgres:
 myPostgresPassword
 
 ALTER USER postgres with password 'myPostgresPassword';
+
+
+[/etc/postgresql/10/main/pg_hba.conf]
+Change peer to md5:
+local all postgres md5
+
+psql -U postgres -d linguagator
+
+
+
+ :> sudo apt install pgtop
+ :> sudo -u postgres pg_top -h localhost -p 5432 -d linguanator -W
