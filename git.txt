@@ -49,3 +49,16 @@ git d HEAD^ HEAD
 
 Using meld:
 git difftool --dir-diff old..new
+-------------------------------------------------------------------------------
+nocheckin pre-commit hook
+[.git/hooks/pre-commit]
+{
+#!/bin/sh
+
+FILES_PATTERN='\.(ts|css|html)(\..+)?$'
+FORBIDDEN='nocheckin'
+git diff --relative --cached --name-only | \
+    grep -E $FILES_PATTERN | \
+    GREP_COLOR='4;5;37;41' xargs grep --color --with-filename -n $FORBIDDEN && echo 'COMMIT REJECTED. "nocheckin" comments found. Please remove them before commiting' && exit 1
+exit 0
+}

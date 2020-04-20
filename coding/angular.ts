@@ -2,8 +2,20 @@
 =============================== TECH =========================================;
 ==============================================================================;
 ng serve --poll=2000
+
+
+Observable, Subject, Operators
+https://itnext.io/the-magic-of-rxjs-sharing-operators-and-their-differences-3a03d699d255
 ==============================================================================;
 =============================== GENERAL ======================================;
+==============================================================================;
+// In order to stop propagation:
+<a (click)="handle($event)"></a>;
+
+public handle(event) {
+    event.stopPropagation();
+    return false; // XXX
+}
 ==============================================================================;
 // Specifying Cmponent info
 @Component({
@@ -344,9 +356,9 @@ ngOnDestroy() {
         [pattern]="<REGEX HERE>"
         required> // is a Validator
     <span *ngIf="!thename.valid && thename.touched">Please enter a valid name</span>
-    <button
+    <button>
         type="submit"
-        [disabled]="!f.valid">Press Me</button
+        [disabled]="!f.valid">Press Me</button>
 </form>;
 
 import { NgForm } from '@angular/core';
@@ -377,7 +389,7 @@ this.signupForm.form.patchValue({
 });
 ==============================================================================;
 // Reactive form
-// Import ReactiveFormsModule instead of FormsModule from '@angular/forms' inside Module
+// XXX: Import ReactiveFormsModule instead of FormsModule from '@angular/forms' inside Module
 // Note: Also available: Validator.pattern(/^[1-9]+[0-9]*$/)
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 const signupForm: FormGroup = new FormGroup({

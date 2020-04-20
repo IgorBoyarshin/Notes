@@ -1,3 +1,7 @@
+psql -U postgres -d linguanator
+myPostgresPassword
+
+
 sudo apt install postgresql postgresql-contrib
 
 

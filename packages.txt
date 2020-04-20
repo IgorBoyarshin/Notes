@@ -4,6 +4,7 @@
 * kdnlive
 * calligra sheets
 * freecad
+* lutris
 
 * Lines starting with (*) are comments.
 * (#) [pac|aur] <package> === package to install.
@@ -30,10 +31,6 @@
 * :> no-internet "plog-converter -a GA:1,2 -t tasklist ./PVS-Studio.log"
 
 
-* kdenlive
-* lutris
-
-* wpa_supplicant
 
 * ------- NTP
 * :> pacman -S ntp
@@ -181,13 +178,16 @@ To fix not working after boot from suspend:
 * Also, rewrite this variable in order to manually do this (possibly no need for manual intervention)
 * :> cat /proc/acpi/bbswitch
 
-* Check how many apps are currently usaing Bumblebee:
+* Check how many apps are currently using Bumblebee:
 * :> optirun --status
 
 * Open nvidia-settings menu
 * :> optirun -b none nvidia-settings -c :8
 * (First install:)
 * # [pac] nvidia-settings
+
+
+
 
 
 * -----------------------------------------------------------------------------
@@ -324,7 +324,7 @@ To fix not working after boot from suspend:
 * Alternative backup music player.
 
 # [pac] easytag
-* Change metadata of audio (music) files.
+* Change metadata of audio (music, mp3) files.
 
 ? [pac] gtypist
 
@@ -384,8 +384,6 @@ To fix not working after boot from suspend:
 % [aur] rxvt-unicode-pixbuf
 * from AUR for image preview rendering support, but it turns out to be
 * somewhat slow (~0.5s), so stick with w3m for that job.
-* Extension for resizing fonts from AUR:
-% [aur] urxvt-resize-font-git
 
 # [pac] acpi
 * Check battery status in console.
@@ -476,6 +474,12 @@ To fix not working after boot from suspend:
 ? [pac] nmap
 * :> sudo nmap -sn 192.168.1.0/24
 
+? [pac] virtualbox
+* Choose virtualbox-host-modules-arch
+* Load the modules listed on arch wiki
+* [pac] virtualbox-guest-iso to install in guest for shared folders (and other stuff) to work
+* Add host and guest to group vboxsf (guest after installing the iso)
+
 ? [pac] sl
 * Steam Locomotive
 
@@ -531,6 +535,10 @@ To fix not working after boot from suspend:
 
 ? [aur] slack-desktop
 
+? [aur] mininet-git
+* sudo mn
+* ovs-vswitchd, ovsdb-server
+
 # [aur] rar
 
 # [aur] tusk
@@ -546,6 +554,10 @@ To fix not working after boot from suspend:
 
 # [aur] ttf-ms-fonts
 * Fonts: Times New Romans and co.
+
+# [aur] urxvt-resize-font-git
+* Extension for resizing fonts from AUR:
+* Orelse: (from github urxvt-resize-font instruction): copy the file to ~/.urxvt/ext/resize-font
 
 # [aur] imagemagick-full
 * Convert images, PDFs, etc.
@@ -578,6 +590,9 @@ To fix not working after boot from suspend:
 
 ? [aur] bash-pipes
 * :> pipes
+
+? [aur] tlauncher-pipes
+* :> java -jar /opt/tlauncher/tlauncher.jar
 
 ? [aur] postman
 * Inspect http endpoint API requests
@@ -617,6 +632,8 @@ To fix not working after boot from suspend:
 * -----------------------------------------------------------------------------
 * ---------------- Android
 * -----------------------------------------------------------------------------
+* [pac] android-file-transfer
+
 * [aur] android-studio
 * Slow
 *

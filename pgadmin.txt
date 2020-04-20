@@ -2,7 +2,7 @@ Create Server:
     General:
         Name: UbuntuDatabase (to use in pgAdmin view)
     Connection:
-        Host name/address: localhost (on AWS the database is server at localhost)
+        Host name/address: localhost (on AWS the database is served at localhost)
         Port: 5432
         Maintenance database: linguanator (which db to set at main)
         Username: postgres

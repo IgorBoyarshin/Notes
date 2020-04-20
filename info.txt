@@ -525,6 +525,16 @@ igorek ALL=(ALL:ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/pacman
 
 Disable stuff here
 /etc/modprobe.d/blacklist.conf
+{
+    blacklist i82975x_edac
+
+    # To disable beep-speaker
+    blacklist pcspkr
+
+    # For NVIDIA, turn off Intel graphics
+    # install i915 /usr/bin/false
+    # install intel_agp /usr/bin/false
+}
 
 
 Extract .deb packages (data from it)
@@ -658,13 +668,18 @@ Pacman (and trizen AUR) parallel compilation
 MAKEFLAGS="-j8"
 
 
+virt-manager
+Start services:
+libvirtd.service virtlogd.service
+
+
 Connect to Amazon AWS via ssh
 :> ssh -i "~/Stuff/igorek-keypair.pem" ubuntu@ec2-52-58-254-176.eu-central-1.compute.amazonaws.com -X
 * Flag -X to prevent freezing
 
 
 Audio, Alsa, Pavucontrol, Pactl
-Real-time echo:
+Real-time echo test:
 :> pactl load-module module-loopback
 :> pactl unload-module module-loopback
 (Is shown in pavucontrol in the Playback tab)
@@ -679,3 +694,15 @@ In other words volatile registers are caller saved registers, as opposed to call
 
 Display webcam video
 :> mpv /dev/video0
+
+Useful utility to track keypresses
+:> xev -event keyboard
+
+
+To fix python dependency for Neovim:
+:> pip3 install --user pynvim
+
+
+Clone (download) a subfolder of github repository:
+:> svn checkout <LINK>
+BUT replace /tree/master with /trunk

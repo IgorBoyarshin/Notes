@@ -4,3 +4,12 @@ qemu-system-x86_64 -smp 2 -m 1G -enable-kvm -cdrom ubuntu-17.04.iso -boot order=
 qemu-system-x86_64 -cdrom winxp.iso -smp 2 -m 2048 -enable-kvm -drive file=win,format=raw -cpu host -usbdevice tablet -vga std -soundhw hda
 
 qemu-system-x86_64 -smp 4 -m 1.5G -enable-kvm -drive file=winxp,format=raw -cpu host -usb -usbdevice tablet -vga std -soundhw hda
+
+==================
+Run script for ubuntu:
+qemu-system-x86_64 -boot order=d -cpu host -smp 4 -machine type=q35,accel=kvm -drive file=ubuntu,format=raw -m 4G -enable-kvm -display gtk -vga virtio
+
+Install script for virt_arch:
+:> qemu-system-x86_64 -cdrom ~/Storage/torrents/archlinux-2020.04.01-x86_64.iso -cpu host -smp 4 -machine type=q35,accel=kvm -enable-kvm -m 4G -display gtk -vga virtio -drive file=virt_arch,format=qcow2
+Install script for virt_arch:
+:> qemu-system-x86_64 -cpu host -smp 4 -machine type=q35,accel=kvm -drive file=virt_arch,format=qcow2 -m 4G -enable-kvm -display gtk -vga virtio

@@ -1,0 +1,88 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{mathtools}
+\usepackage{pdfpages}
+\usepackage[a4paper, margin=0.8in]{geometry}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1, T2A]{fontenc}
+\usepackage{indentfirst} % sets to indent for the first line of a section by default
+\usepackage{multicol}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{float} % to use H for figures (exact placement)
+
+\begin{document}
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\begin{titlepage}
+    \centering
+    \noindent\makebox[\textwidth]{\includegraphics{title_pic}}
+    {\scshape\large
+Міністерство освіти і науки України\\
+Національний технічний університет України\\
+«Київський політехнічний інститут ім. Ігоря Сікорського»\\
+Факультет інформатики та обчислювальної техніки\\
+    \par}
+
+\vfill
+
+    {\Large\bfseries
+Лабораторна робота №1-3
+    \par}
+\vspace{1ex}
+    {\scshape
+        З курсу ``ПРОЕКТУВАННЯ КОМП’ЮТЕРНИХ СИСТЕМ''
+    \par}
+\vspace{1ex}
+    {\scshape\large
+        Визначення характеристик топологій
+    \par}
+
+\vfill
+
+\raggedleft
+
+    {\large
+Виконав:\\
+    \vspace{1ex}
+студент групи ІВ-91мн\\
+Бояршин Ігор\\
+    \par}
+
+\vfill
+
+\centering
+
+    {\large
+Київ 2019 р.
+    \par}
+\end{titlepage}
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+\section*{Begin here}
+
+\begin{enumerate}
+    \item first
+\end{enumerate}
+
+\begin{itemize}
+    \item first
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\textwidth]{ex1}
+\caption{Приклад роботи алгоритму}
+\end{figure}
+
+\begin{tabular}{ | c | r | l | }
+\hline
+    \textbf{Шарів} & \textbf{Процесорів} & \textbf{Діаметр} \\ \hline
+    1 & 10 & 2 \\ \hline
+    2 & 30 & 5 \\ \hline
+\end{tabular}
+
+\end{document}

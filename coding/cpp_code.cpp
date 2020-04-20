@@ -160,6 +160,8 @@ void func(__attribute__((unused)) int x) {}
 // ----------------------------------------------------------------------------
 // --------------- Memset
 // ----------------------------------------------------------------------------
+#include <cstring>
+
 int buffer[5];
 memset(buffer, 0, 5 * sizeof(int))
 // ----------------------------------------------------------------------------
@@ -215,3 +217,52 @@ constexpr std::string_view type_name() {
     return string_view(p.data() + 84, p.size() - 84 - 7);
 #endif
 }
+// ----------------------------------------------------------------------------
+// --------------- Read file
+// ----------------------------------------------------------------------------
+#include <fstream>
+
+int main() {
+    std::ifstream file("name.txt");
+    if (!file.is_open()) throw std::runtime_error("failed to open file!");
+
+    // Faster
+    char lineChars[200];
+    while (file.getline(lineChars, 200)) {
+        const int var = std::atoi(lineChars + 5);
+        for (i = 0; lineChars[i] != '\0'; i++) {
+            // Stuff
+        }
+    }
+
+    // Usual
+    std::string line;
+    while (getline(file, line)) {
+        const int var = std::atoi(line.c_str() + 5);
+        for (i = 0; i < line.size(); i++) {
+            // Stuff
+        }
+    }
+
+    file.close();
+
+    return 0;
+}
+// ----------------------------------------------------------------------------
+// --------------- Automatically write function type
+// ----------------------------------------------------------------------------
+std::cout << __PRETTY_FUNCTION__ << '\n';
+// ----------------------------------------------------------------------------
+// --------------- Variadic templates
+// ----------------------------------------------------------------------------
+// Cannot specify the return type because we need to deduce the number of elements
+// in order to do so. There is a workaround using the <type_trains> header and
+// the -> notation.
+template <typename... T>
+auto make_array(T&&...t) {
+    return std::array<int, sizeof...(t)>{ std::forward<T>(t)... };
+}
+
+// XXX: 4 can be >= 3, because the size of an initializer-list can be <= than
+// the size of the container
+std::array<int, 4> arr = make_array(1, 2, 3);

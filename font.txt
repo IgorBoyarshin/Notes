@@ -1,0 +1,57 @@
+fc-cache -fv
+fc-list > tmp.txt
+
+https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/SourceCodePro/Medium/complete
+
+
+
+Font
+In order to add new fonts:
+1) place the folder containing a font family inside
+    [/usr/share/fonts] === for all users
+    [/.local/share/fonts] === for current user
+    Make sure the folder and files in it can be read by everybody.
+2) Make the system search for fonts in that location
+    (Note: the name of the file doesn't matter, just make it {digit}{digit}-*.conf).
+    [/etc/X11/xorg.conf.d/10-fonts.conf]
+    "
+        # Let X.Org know about the custom font directories
+        Section "Files"
+            FontPath    "/usr/share/fonts/100dpi"
+            FontPath    "/usr/share/fonts/75dpi"
+            FontPath    "/usr/share/fonts/consolas-powerline"
+            FontPath    "/usr/share/fonts/cantarell"
+            FontPath    "/usr/share/fonts/cyrillic"
+            FontPath    "/usr/share/fonts/encodings"
+            FontPath    "/usr/share/fonts/gsfonts"
+            FontPath    "/usr/share/fonts/Inconsolata"
+            FontPath    "/usr/share/fonts/FiraCode"
+            FontPath    "/usr/share/fonts/SourceCodePro"
+            FontPath    "/usr/share/fonts/InconsolataGo"
+            FontPath    "/usr/share/fonts/misc"
+            FontPath    "/usr/share/fonts/Mononoki"
+            FontPath    "/usr/share/fonts/OTF"
+            FontPath    "/usr/share/fonts/TTF"
+            FontPath    "/usr/share/fonts/Type1"
+            FontPath    "/usr/share/fonts/util"
+        EndSection
+    "
+(Note: the contents of the file must correspond to dirs in the "fonts" folder).
+3) Update the font cache(most likely an unnecessary step)
+    :> fc-cache
+4) Find out the name of the font
+    :> fc-list
+    (Note: output to a file and do a search)
+5) In .Xresources set the font by its name
+6) Reload .Xresources
+    :> xrdb ~/.Xresources
+
+Just to remember:
+https://seasonofcode.com/posts/how-to-set-default-fonts-and-font-aliases-on-linux.html
+vim .config/fontconfig/fonts.conf
+{
+    <?xml version='1.0'?>
+    <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
+    <fontconfig>
+    </fontconfig>
+}

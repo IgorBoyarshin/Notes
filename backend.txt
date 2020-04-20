@@ -34,3 +34,12 @@ Default web-page:
 /etc/nginx/sites-enabled/default
 /etc/nginx/sites-available/whateveryouwannacallit
 /etc/nginx/sites-enabled/whateveryouwannacallit
+================================================================================
+==================================== SSL HTTPS =================================
+================================================================================
+On backend:
+:> sudo certbot --nginx -d whateveryouwannacallit.tk -d www.whateveryouwannacallit.tk
+================================================================================
+==================================== Domain name, DNS ==========================
+================================================================================
+my.freenom.com
