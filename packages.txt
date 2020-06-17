@@ -242,6 +242,9 @@ To fix not working after boot from suspend:
 ? [pac] pgadmin4
 * PostgreSQL database web client
 
+? [pac] gnu-netcat
+* nc and netcat utilities
+
 * SSH
 # [pac] openssh
 * :> sudo systemctl enable sshd.service
@@ -441,6 +444,9 @@ To fix not working after boot from suspend:
 * Latex
 ? [aur] wiki2beamer
 
+# [aur] xkb-switch
+* To print the current language
+
 # [pac] img2pdf
 
 # [pac] fzf
@@ -498,11 +504,15 @@ To fix not working after boot from suspend:
 * Manual keyboard rate and delay changing
 * :> xset r rate 200 40
 
+? [pac] winetricks
+* ??????
 ? [pac] wine
 * For .NET apps:
 ? [pac] wine-mono
 * For IE:
 ? [pac] wine_gecko
+* For audio:
+* :> lib32-libpulse
 
 ? [pac] rofi
 * Instead of dmenu

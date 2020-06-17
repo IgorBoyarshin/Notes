@@ -5,6 +5,11 @@ General
 :> sudo ip neigh delete 10.18.51.3 dev enp59s0
 
 
+Connect two PCs with cable
+:> sudo ifconfig enp59s0 10.0.0.10 netmask 255.255.255.0 up
+:> sudo ifconfig enp59s0 10.0.0.20 netmask 255.255.255.0 up
+
+
 List other hosts on network
 :> arp -a
 :> ip neigh show

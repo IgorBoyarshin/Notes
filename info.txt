@@ -706,3 +706,103 @@ To fix python dependency for Neovim:
 Clone (download) a subfolder of github repository:
 :> svn checkout <LINK>
 BUT replace /tree/master with /trunk
+
+
+Fixed screen tearing (possibly because of mesa) with:
+[/etc/environment]:
+{
+MESA_LOADER_DRIVER_OVERRIDE=i965
+}
+
+
+Command-line calculator:
+:> echo "2+3" | bc -l
+:> netcat 10.0.3.101 $(echo "2+3" | bc -l)
+
+
+NVIDIA, Second monitor, Samsung
+:> svim /etc/default/grub
+{
+GRUB_CMDLINE_LINUX_DEFAULT="... nvidia-drm.modeset=1"
+}
+
+:> svim /etc/mkinitcpio.conf
+{
+MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
+}
+:> sudo mkinitcpio -p linux
+
+:> vim .xinitrc
+{
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+xrandr --output "HDMI-0" --off
+xrandr --output "HDMI-0" --auto --primary --output "eDP-1-1" --off
+}
+
+Arch Wiki for KMS, at the bottom, "Disabling modesetting" may be related to blank (black) screen and "no signal" from the display
+
+
+
+======== New fonts notes =============
+/usr/share/fonts/Sauce/font.ttf
+:> fc-cache -fv
+
+
+
+Errors containing "Can't open Display" and "no protocol specified" are related
+to setting the DISPLAY=:0 and XAUTHORITY=/home/igorek/.Xauthority respectively.
+
+
+========== Suspend/sleep ===============
+Log in:
+:> journalctl -b -u systemd-suspend.service
+
+Hook script in:
+/usr/lib/systemd/system-sleep/my_hook
+{
+    export DISPLAY=:0
+    export XAUTHORITY=/home/igorek/.Xauthority
+
+    case $1/$2 in
+        pre/*)
+            /home/igorek/.mon_small.zsh
+            ;;
+        post/*)
+            /home/igorek/.mon_large.zsh
+            ;;
+    esac
+}
+
+
+Flight Simulator to remember
+From FSX to P3D to MFS
+
+
+German Uni
+patrik.stoer@fau.de
+
+
+To fix coloring (and maybe environmental variables) in console(terminal)
+:> tput reset
+
+
+Redirect stderr output:
+./stuff > out.txt 2>&1
+
+
+Rename files with common prefix,
+Replace pattern in many files:
+:> for file in prefix_*; do mv "$file" "${file/prefix_/new_prefix}"; done
+
+
+Print second and third columns, separated by comma:
+:> cut -d, -f 2,3 file.txt
+
+
+Make all text uppercase:
+:> cat file.txt | tr "[:lower:]" "[:upper:]"
+
+
+Replace all occurances of a letter:
+:> cat file.txt | tr W J
