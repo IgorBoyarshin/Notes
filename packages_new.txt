@@ -1,0 +1,69 @@
+================ Install Trizen
+:> git clone https://aur.archlinux.org/trizen.git
+:> cd trizen
+:> makepkg -si
+
+
+[pac] mpv
+[pac] pamixer
+[pac] xorg-xrandr
+[pac] xclip
+[pac] rsync
+[pac] neovim
+[pac] scrot
+[pac] picom
+[pac] libxft
+[pac] libxinerama
+[pac] man
+[pac] telegram-desktop
+[pac] mpd
+[pac] ncmpcpp
+[pac] pavucontrol
+[pac] libreoffice-still
+[aur] google-chrome
+[aur] xkb-switch
+[aur] sxiv-rifle
+[aur] the_silver_searcher
+[pac] net-tools
+[pac] tree
+
+
+? [aur] qemu
+
+================ Android
+? [pac] android-file-transfer
+? [aur] android-studio
+? [pac] libmtp
+? [aur] android-udev
+? [pac] android-tools
+? [aur] android-sdk-dummy
+? [aur] android-sdk-build-tools-dummy
+? [aur] android-sdk-platform-tools-dummy
+
+================ Rust
+Set CARGO_HOME and RUSTUP_HOME env variables.
+Google rust install, run the shell script.
+:> rustup default nightly
+:> cargo +nightly install racer
+
+================ To remember
+? [pac] perl-file-mimeinfo
+
+Draw colors from background image:
+? [aur] python-pywal
+
+Games:
+? [aur] bombermaaan
+? [aur] nsnake
+
+? [aur] tlauncher-pipes
+:> java -jar /opt/tlauncher/tlauncher.jar
+
+================ To check out
+master pdf editor
+audacity
+kdnlive
+calligra sheets
+freecad
+lutris
+tshark

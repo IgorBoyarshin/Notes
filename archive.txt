@@ -1,0 +1,81 @@
+# [stack] pandoc
+:> stack install --system-ghc pandoc
+Takes a long time to complete
+
+
+? [aur] flashplayer-standalone
+Play Flash player *.swf files
+
+
+? [aur] vmware-workstation
+Additional setup required (read arch wiki) (services and modprobe).
+To fix networking (may require preceding reboot):
+:> sudo vmware-networks --start
+
+===============================================================================
+================ Haskell, xmonad, xmobar, ghc
+===============================================================================
+[
+    Haskell:           https://wiki.archlinux.org/index.php/Haskell
+    Xmonad and Xmobar: http://brianbuccola.com/how-to-install-xmonad-and-xmobar-via-stack/
+]
+# [aur] stack-static
+(Use: --noconfirm --skipinteg)
+    Another solution, remove if unnesessary:
+    :> trizen -S stack-bin
+    :> stack setup --system-ghc
+    :> stack install --system-ghc cabal-install
+Will create ~/.stack (will download stuff):
+:> stack setup
+Now you can do ":> stack ghc" or ":> stack ghci"
+:> cd ~/.xmonad
+:> git clone "https://github.com/xmonad/xmonad" xmonad-git
+:> git clone "https://github.com/xmonad/xmonad-contrib" xmonad-contrib-git
+:> git clone "https://github.com/jaor/xmobar" xmobar-git
+:> stack init
+:> vim stack.yaml
+{
+...
+flags:
+    xmobar:
+        all_extensions: true
+        with_xft: true
+...
+}
+:> stack install
+if complains, add (it suggests so):
+...deps: [iwlib-0.1.0]
+And also install from pacman haskell-iwlib
+Check that ~/.local/bin is in $PATH
+:> vim build
+{
+#!/bin/sh
+exec stack ghc -- \
+  --make xmonad.hs \
+  -i \
+  -ilib \
+  -fforce-recomp \
+  -main-is main \
+  -v0 \
+  -o "$1"
+}
+:> chmod a+x build
+
+In order to recompile and restart xmonad:
+:> ~/.xmonad/build
+[WIN+q]
+
+Every time you update (with "git pull") the three downloaded repositories:
+:> stack install
+May first need to do if added a new flag or dependency:
+:> stack clean
+
+Also
+ghc-mod:
+    :> stack install ghc-mod
+cabal-install:
+    :> stack install cabal-install
+
+
+Stack install with flag
+:> stack install --flag xmobar:with_xft xmobar

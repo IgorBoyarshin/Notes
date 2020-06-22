@@ -95,10 +95,6 @@ To run (n)vim as sudo and properly load the .vimrc
 :> sudo -E nvim ...
 
 
-List devices, partitions
-:> lsblk
-
-
 When errors arise from yaourt due to gpg(pgp) check fail
 :> yaourt --m-arg --skipchecksums --m-arg --skippgpcheck -Sb <package>
 For trizen:
@@ -152,7 +148,7 @@ In order to add new fonts:
     "
 (Note: the contents of the file must correspond to dirs in the "fonts" folder).
 3) Update the font cache(most likely an unnecessary step)
-    :> fc-cache
+    :> fc-cache -fv
 4) Find out the name of the font
     :> fc-list
     (Note: output to a file and do a search)
@@ -220,20 +216,9 @@ Mounting external USB
 :> sudo mount -o uid=igorek,gid=users,fmask=111,dmask=000 /dev/sdb1 /mnt/External
 
 
-Stack install with flag
-:> stack install --flag xmobar:with_xft xmobar
-
-
 Info about keybindings
 :> loadkeys
 :> showkey
-
-
-Pipes
-Create:
-:> mkfifo <name>
-Remove:
-:> rm <name>
 
 
 Execute an action on file change
@@ -244,14 +229,6 @@ Execute an action on file change
 
 Create a symbolic link(symlink)
 :> ln -s -T TARGET LINK_NAME
-
-
-Find and connect to a new Wifi
-(Note: After system installation: disable dhcpcd and netctl, enable NetworkManager)
-Search:
-:> nmcli device wifi
-Connect:
-:> nmcli device wifi connect <SSID> password <PASSWORD>
 
 
 Git credentials
@@ -400,6 +377,7 @@ Format
 Quick format:
 :> mkfs.ntfs /dev/sdb1 -Q
 Format into FAT32(vfat)
+(need [pac] dosfstools)
 :> mkfs.vfat -n 'LABEL_NAME' -I /dev/sdb1
 
 
@@ -761,17 +739,19 @@ Log in:
 Hook script in:
 /usr/lib/systemd/system-sleep/my_hook
 {
-    export DISPLAY=:0
-    export XAUTHORITY=/home/igorek/.Xauthority
+#!/bin/sh
 
-    case $1/$2 in
-        pre/*)
-            /home/igorek/.mon_small.zsh
-            ;;
-        post/*)
-            /home/igorek/.mon_large.zsh
-            ;;
-    esac
+export DISPLAY=:0
+export XAUTHORITY=/home/igorek/.Xauthority
+
+case $1/$2 in
+    pre/*)
+        /home/igorek/.mon_small.zsh
+        ;;
+    post/*)
+        /home/igorek/.mon_large.zsh
+        ;;
+esac
 }
 
 
@@ -806,3 +786,9 @@ Make all text uppercase:
 
 Replace all occurances of a letter:
 :> cat file.txt | tr W J
+
+
+Generate pacman mirrors:
+https://www.archlinux.org/mirrorlist/
+/etc/pacman.d/mirrorlist
+:> sudo pacman -Syyu

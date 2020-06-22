@@ -1,23 +1,6 @@
-* To check out:
-* master pdf editor
-* audacity
-* kdnlive
-* calligra sheets
-* freecad
-* lutris
-
-* Lines starting with (*) are comments.
-* (#) [pac|aur] <package> === package to install.
-* (?) [pac|aur] <package> === potential package, don't install them in the main batch.
-* (%) [pac|aur] <package> === archived. Never install. Just remember that they exist.
-
 * -----------------------------------------------------------------------------
 * ---------------- Manual
 * -----------------------------------------------------------------------------
-* [??] ffmpeg
-* Convert audio or video files
-* :> ffmpeg -i input.mp4 output.webm
-
 * WPS languages
 * http://wps-community.org/download/dicts/
 * https://askubuntu.com/questions/602352/change-spell-check-language-in-wps-office
@@ -31,13 +14,10 @@
 * :> no-internet "plog-converter -a GA:1,2 -t tasklist ./PVS-Studio.log"
 
 
-
 * ------- NTP
 * :> pacman -S ntp
 * :> systemctl daemon-reload
 * :> systemctl enable ntpd
-
-* After the file - run distribute.zsh.
 
 * Trizen
 * :> git clone https://aur.archlinux.org/trizen-git.git
@@ -53,67 +33,6 @@
 * :> git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 * Inside tmux press `+I (prefix+I) to Install
 
-* Haskell, xmonad, xmobar, ghc
-* [
-*     Haskell:           https://wiki.archlinux.org/index.php/Haskell
-*     Xmonad and Xmobar: http://brianbuccola.com/how-to-install-xmonad-and-xmobar-via-stack/
-* ]
-* # [aur] stack-static
-* (Use: --noconfirm --skipinteg)
-    * Another solution, remove if unnesessary:
-    * :> trizen -S stack-bin
-    * :> stack setup --system-ghc
-    * :> stack install --system-ghc cabal-install
-* Will create ~/.stack (will download stuff):
-* :> stack setup
-* Now you can do ":> stack ghc" or ":> stack ghci"
-* :> cd ~/.xmonad
-* :> git clone "https://github.com/xmonad/xmonad" xmonad-git
-* :> git clone "https://github.com/xmonad/xmonad-contrib" xmonad-contrib-git
-* :> git clone "https://github.com/jaor/xmobar" xmobar-git
-* :> stack init
-* :> vim stack.yaml
-* {
-* ...
-* flags:
-*     xmobar:
-*         all_extensions: true
-*         * with_xft: true
-* ...
-* }
-* :> stack install
-* if complains, add (it suggests so):
-* ...deps: [iwlib-0.1.0]
-* And also install from pacman haskell-iwlib
-* Check that ~/.local/bin is in $PATH
-* :> vim build
-* {
-* #!/bin/sh
-* exec stack ghc -- \
-*   --make xmonad.hs \
-*   -i \
-*   -ilib \
-*   -fforce-recomp \
-*   -main-is main \
-*   -v0 \
-*   -o "$1"
-* }
-* :> chmod a+x build
-*
-* In order to recompile and restart xmonad:
-* :> ~/.xmonad/build
-* [WIN+q]
-*
-* Every time you update (with "git pull") the three downloaded repositories:
-* :> stack install
-* May first need to do if added a new flag or dependency:
-* :> stack clean
-*
-* Also
-* ghc-mod:
-*     :> stack install ghc-mod
-* cabal-install:
-*     :> stack install cabal-install
 *
 * Vimproc (Haskell for Vim):
 * If encounter an .so DLL error => inside Vim run 'VimProcInstall'
@@ -181,14 +100,6 @@ To fix not working after boot from suspend:
 * Check how many apps are currently using Bumblebee:
 * :> optirun --status
 
-* Open nvidia-settings menu
-* :> optirun -b none nvidia-settings -c :8
-* (First install:)
-* # [pac] nvidia-settings
-
-
-
-
 
 * -----------------------------------------------------------------------------
 * ---------------- Thematic
@@ -212,9 +123,6 @@ To fix not working after boot from suspend:
 * ---------------- Pacman
 * -----------------------------------------------------------------------------
 
-* # [pac] os-prober
-* Needed for UEFI??
-
 # [pac] libreoffice-still
 * Libreoffice launch agruments
 * --version       Displays the version information.
@@ -225,29 +133,15 @@ To fix not working after boot from suspend:
 * --math          Starts with an empty Math document.
 
 
-
-# [pac] jdk8-openjdk
-* Consider later versions
-
-# [pac] htop
-
 # [pac] tlp
 * :> sudo systemctl enable tlp.service tlp-sleep.service
 * :> sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
-
-# [pac] tmux
-
-# [pac] zip
 
 ? [pac] pgadmin4
 * PostgreSQL database web client
 
 ? [pac] gnu-netcat
 * nc and netcat utilities
-
-* SSH
-# [pac] openssh
-* :> sudo systemctl enable sshd.service
 
 # [pac] unzip
 
@@ -311,15 +205,6 @@ To fix not working after boot from suspend:
 # [pac] cronie
 * Enable: cronie.service
 
-# [pac] mpv
-* ~/.config/mpv/input.conf
-* ~/.config/mpv/mpv.conf
-* ~/.config/mpv/lua-settings/osc.conf
-
-# [pac] newsboat
-* ~/.newsboat/urls
-* ~/.newsboat/config
-
 # [pac] nasm
 * For Assembly.
 
@@ -334,13 +219,6 @@ To fix not working after boot from suspend:
 # [pac] mlocate
 * After install:
 * :> sudo updatedb
-
-# [pac] rsync
-
-# [aur] bombermaaan
-* game
-
-# [pac] w3m
 
 # [pac] ttf-croscore
 * Chrome OS fonts
@@ -600,62 +478,3 @@ To fix not working after boot from suspend:
 
 ? [aur] bash-pipes
 * :> pipes
-
-? [aur] tlauncher-pipes
-* :> java -jar /opt/tlauncher/tlauncher.jar
-
-? [aur] postman
-* Inspect http endpoint API requests
-
-? [aur] bombermaaan
-* game
-
-? [aur] nsnake
-
-? [aur] flashplayer-standalone
-* Play Flash player *.swf files
-
-? [aur] vmware-workstation
-* Additional setup required (read arch wiki) (services and modprobe).
-* To fix networking (may require preceding reboot):
-* :> sudo vmware-networks --start
-
-? [aur] python-pywal
-* Draw colors from background image
-
-* -----------------------------------------------------------------------------
-* ---------------- Stack
-* -----------------------------------------------------------------------------
-
-* # [stack] pandoc
-* :> stack install --system-ghc pandoc
-* Takes a long time to complete
-
-* -----------------------------------------------------------------------------
-* ---------------- TODOs
-* -----------------------------------------------------------------------------
-* Fonts:
-* Install powerline fonts from https://github.com/powerline/fonts
-* :> trizen -S ttf-consolas-powerline
-* For special glyphs:
-* :> pacman -S ttf-freefont
-* -----------------------------------------------------------------------------
-* ---------------- Android
-* -----------------------------------------------------------------------------
-* [pac] android-file-transfer
-
-* [aur] android-studio
-* Slow
-*
-* [pac] libmtp
-* Maybe
-
-* [aur] android-udev
-* Maybe
-
-* [pac] android-tools
-* Fast
-*
-* [aur] android-sdk-dummy
-* [aur] android-sdk-build-tools-dummy
-* [aur] android-sdk-platform-tools-dummy

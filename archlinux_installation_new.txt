@@ -7,14 +7,21 @@ To setup wifi:
 
 Other:
 dhcpcd service
+:> wifi-menu -o <Wifi interface name>
 ================ Make sure the clock is OK
 :> timedatectl set-ntp true
 ================ Partition the disk
 ======== GPT
 :> fdisk -l
 :> fdisk /dev/sda
-Boot partition 200M, Root partition.
-Type of Boot is EFI System (1).
+
+- Boot 200M, Type=1 (EFI System)
+- Root ~~, Type=20 (Linux filesystem)
+- Swap 16G, Type=19 (Linux swap)
+======== MBR
+- Boot +200M, Type=...bootable flag (a)
+- Swap +16G, Type=...swap flag (82)
+- Root ~~, Type=...
 ======== Common
 m === help
 p === print partition table
@@ -22,168 +29,108 @@ n === add new partition
 l === list partition types
 t === change partition type
 w === write changes
-
-Boot: +200M, set bootable flag (a)
-Swap: +4G, set swap flag (82)
-Root: +25G
-
-# EFI was 100MB, partition2
-# Add your root (100G)
-# Add swap(16G) on hdd
 ================ Create filesystem
-For Boot, Root and Home
+For Root and Home and Boot(if did not exist before):
 :> mkfs.ext4 /dev/sda1
 ================ Prepare swap
 :> mkswap /dev/sda1
 :> swapon /dev/sda1
 ================ Mount
-======== New
-:> mkdir /mnt/boot
 Root:
 :> mount /dev/sda2 /mnt
 Boot:
+:> mkdir /mnt/boot
 :> mount /dev/sda1 /mnt/boot
-======== Old
-:> mount /dev/sda1 /mnt #root
-:> mkdir /mnt/home
-:> mkdir /mnt/sda2 /mnt/boot
-:> mount /dev/sda3 /mnt/home
 ================ Install the system
-:> pacstrap -i /mnt base base-devel <OTHER PACKAGES> vim
+:> pacstrap -i /mnt base base-devel vim ntfs-3g <OTHER PACKAGES>
 -i === avoid auto-confirmation of package selection
 ================ Generate fstab
+Mount other partitions that you would like to be present in fstab.
 :> genfstab -U -p /mnt >> /mnt/etc/fstab
 -U === use UUIDs instead of /dev/sda1
 -p === avoid printing pseudofs mounts
--------------------------------- Enter the new system
+================ Enter the new system
 :> arch-chroot /mnt
--------------------------------- Time zone
+================ Time zone
 ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
 hwclock --systohc --utc
--------------------------------- Locale
+================ Locale
 :> vim /etc/locale.gen
-:> locale-gen
 {
+    de_AT.UTF-8 UTF-8
+    de_AT ISO-8859-1
+
     en_US.UTF-8 UTF-8
     en_US ISO-8859-1
-    ...
+
+    ru_RU.UTF-8 UTF-8
+    ru_RU ISO-8859-5
+
+    uk_UA.UTF-8 UTF-8
 }
+
+:> locale-gen
 
 :> vim /etc/locale.conf
 {
     LANG=en_US.UTF-8
 }
-#OR ALTERNATIVELY
-#    :> locale-gen
-#    :> echo LANG=en_US.UTF-8 > /etc/locale.conf
-#    :> export LANG=en_US.UTF-8
-# OR ALTERNATIVELY
-#     :> localectl set-locale LANG="en_US.UTF-8"
--------------------------------- Install stuff
+================ Install stuff
 UEFI:
-:> pacman -S grub efibootmgr os-prober intel-ucode wpa_supplicant wireless_tools networkmanager vim git dialog linux-headers
+:> pacman -S grub efibootmgr os-prober intel-ucode wpa_supplicant wireless_tools networkmanager vim git zsh dialog linux linux-headers
 BIOS:
-:> pacman -S grub-bios os-prober intel-ucode networkmanager wpa_supplicant wireless_tools vim git linux-headers
--------------------------------- Grub
-/boot/efi must be already mounted!!
-Mount all partitions that contain OS for os-prober
+:> pacman -S grub-bios os-prober intel-ucode networkmanager wpa_supplicant wireless_tools vim git zsh linux linux-headers
+================ Grub
+======== UEFI, GPT
+/boot is expected to be mounted to the EFI partition.
 
-UEFI:
-:> grub-install --target=x86_64-efi --bootloader-id=arch_grub_uefi --efi-directory=/boot/efi --recheck
+:> grub-install --target=x86_64-efi --bootloader-id=arch_grub_uefi --efi-directory=/boot --recheck
 :> os-prober
 :> grub-mkconfig -o /boot/grub/grub.cfg
-BIOS:
+======== BIOS, MBR
 :> grub-install --target=i386-pc --recheck /dev/sda
 :> os-prober
 :> grub-mkconfig -o /boot/grub/grub.cfg
--------------------------------- Other
-:> pacman -S linux
+================ Other
 :> mkinitcpio -p linux
-!!!!!!!!!!! grub-mkconfig must be run after image creation !!!!!!!!!!!!!!!!!
 
-Set root password
+TODO
+TODO: run mkinitcpio before or after grub-mkconfig??
+!!!!!!!!!!! grub-mkconfig must be run after image creation !!!!!!!!!!!!!!!!!
+TODO
+TODO
+
+======== Set root password
 :> passwd
 
-Set hostname
+======== Set hostname
 :> echo "apollo" > /etc/hostname
-OR
-:> hostnamectl set-hostname apollo
--------------------------------- Enable & disable stuff
+================ Enable & disable stuff
 !!!! You need NetworkManager even for ethernet connection !!!!
 :> systemctl enable NetworkManager
 :> systemctl disable dhcpcd
--------------------------------- Finish
+================ Finish
 :> exit
-
 :> umount -R /mnt
 -R === recursive (so /mnt and all sub-directories)
-
 :> reboot
---------------------------------
-post install
+================ Post install
+:> pacman -S xf86-input-libinput mesa xorg-server xorg-xinit
 
-:> pacman -S xf86-input-libinput xf86-input-synaptics mesa xorg-server xorg-xinit
+For Nvidia:
+:> pacman -S nvidia
 
-For nvidia compatible:
-:> pacman -S xf86-video-nouveau lib32-nouveau-dri
-
-For nvidia original:
-:> pacman -S nvidia lib32-nvidia-libgl
---------------------------------
 :> vim /etc/pacman.conf
-Uncomment multilib(2 lines) at the end
+Uncomment multilib(2 lines) at the end,
 Add {
     [archlinuxfr]
     SigLevel = Never
     Server = http://repo.archlinux.fr/$arch
 }
 
-
 :> visudo
 Uncomment wheel
-:> useradd -m -g users -G audio,lp,optical,storage,video,wheel,games,power,scanner -s /bin/bash igorek
+(If complains about missing editor, just do :> EDITOR=vim visudo)
+
+:> useradd -m -G audio,lp,optical,storage,video,wheel,games,power,scanner -s /usr/bin/zsh igorek
 :> passwd igorek
--------------------------------------------------------------------------------
--------------------------------- Old stuff & info
--------------------------------------------------------------------------------
-journalctl -u <name>
-journalctl -b       [from this boot]
---------------------------------
-Display Manager | Login Manager
-
-LightDM:
-
-:> pacman -S lightdm lightdm-gtk-greeter
-:> systemctl enable lightdm
-:> vim /etc/lightdm/lightdm.conf [set default greeter in greeter-sesdion]
--------------------------------- mirrorlist for pacman
-vim /etc/pacman.d/mirrorlist
-[from browser: arch generate new mnirrorlist. replace the mirrorlist file]
-:> sudo pacman -Syyy   [regenerate]
-------- NTP
-:> pacman -S ntp
-:> systemctl daemon-reload
-:> systemctl enable ntpd
------- Bluetooth
-:> pacman -S bluez bluez-utils [blueman]
-:> systemctl enable bluetooth
------ Battery
-:> pacman -S tlp
-:> systemctl enable tlp
------ gnome extentions
-Activities configurator
-Dash to dock
-system-monitor
-Topicons plus
--------------------------------------------------------------------------------
-Fonts:
-:> pacman -S ttf-linux-libertine ttf-inconsolata
-
-:> vim ~/.config/fontconfig/fonts.conf
-{}
-
-.zprofile is responsible for Xorg auto-launch right after login
---------------------------------
-IF YOU ARE UNABLE TO USE ETHERNET AND USING WIFI-MENU DOESN'T WORK:
-Issue the command 'ip link'. This will list your internet interfaces. You'll see something like 'emp0s3'. This is your Ethernet Interface, because it starts with an E. You'll also see something like 'wls1'. This is your Wi-Fi Interface.
-Once you've found your Wi-Fi Interface, issue the command 'wifi-menu -o your Wi-Fi Interface here'. The -o tells Wifi-Menu what Interface to use. Connect to your Wi-Fi, and then follow the instructions of the video.
