@@ -492,7 +492,7 @@ To fix networking in VMWare (may require preceding reboot):
 :> sudo vmware-networks --start
 
 
-Get all installed packages
+List all installed packages
 :> pacman -Qe
 :> yapurt -Qe
 
