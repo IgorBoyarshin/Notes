@@ -4,6 +4,10 @@
 :> makepkg -si
 
 
+Zplug
+Antigen
+
+
 [pac] mpv
 [pac] pamixer
 [pac] xorg-xrandr
@@ -26,6 +30,14 @@
 [aur] the_silver_searcher
 [pac] net-tools
 [pac] tree
+[pac] redshift
+[pac] youtube-dl
+[pac] easytag
+[pac] unzip
+[pac] zathura zathura-pdf-mupdf zathura-djvu
+[pac] acpi
+[pac] tlp
+sudo systemctl enable tlp.service
 
 
 ? [aur] qemu

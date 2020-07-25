@@ -698,11 +698,46 @@ Command-line calculator:
 :> netcat 10.0.3.101 $(echo "2+3" | bc -l)
 
 
-NVIDIA, Second monitor, Samsung
+===============================================================================
+============================ NVIDIA, Second monitor, Samsung ==================
+===============================================================================
+================================
+================ The new way, with optimus-manager
+================================
+Make sure there are no video-related settings files in /etc/X11/xorg.conf.d/
+
+:> pacman -S optimus-manager bbswitch
+(bbswitch to be able to turn off NVIDIA completely when in intel mode)
+
+In .xinitrc execute /usr/bin/prime-offload at the beginning
+
+In /etc/optimus-manager/optimus-manager.conf (if does not exist, copy default from /usr/share/optimus-manager.conf),
+make sure that:
+{
+    [optimus]
+    switching=bbswitch
+    pci_power_control=no
+    pci_remove=no
+    pci_reset=no
+}
+(From https://github.com/Askannz/optimus-manager/wiki/A-guide--to-power-management-options)
+
+To specify the GPU via a kernel parameter:
+optimus-manager.startup=nvidia
+
+To add custom GRUB boot entries:
+* remove the executable bit from the default 10-linux
+* copy from /boot/grub/grub.cfg the settings from the default linux section into a new file (15-custom)
+* make it executable
+* ...and modify to have custom kernel paratemers
+================================
+================ Manual, old way
+================================
 :> svim /etc/default/grub
 {
 GRUB_CMDLINE_LINUX_DEFAULT="... nvidia-drm.modeset=1"
 }
+:> sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 :> svim /etc/mkinitcpio.conf
 {
@@ -718,7 +753,27 @@ xrandr --output "HDMI-0" --off
 xrandr --output "HDMI-0" --auto --primary --output "eDP-1-1" --off
 }
 
+:> vim /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+{
+Section "Module"
+    Load "modesetting"
+EndSection
+
+
+Section "Device"
+    Identifier "nvidia"
+    Driver "nvidia"
+    BusID  "PCI:1:0:0"
+    Option "AllowEmptyInitialConfiguration"
+    Option "NoLogo" "true"
+    Option "ConnectedMonitor" "DFP"
+EndSection
+}
+
 Arch Wiki for KMS, at the bottom, "Disabling modesetting" may be related to blank (black) screen and "no signal" from the display
+===============================================================================
+===============================================================================
+===============================================================================
 
 
 
@@ -755,10 +810,6 @@ esac
 }
 
 
-Flight Simulator to remember
-From FSX to P3D to MFS
-
-
 German Uni
 patrik.stoer@fau.de
 
@@ -792,3 +843,13 @@ Generate pacman mirrors:
 https://www.archlinux.org/mirrorlist/
 /etc/pacman.d/mirrorlist
 :> sudo pacman -Syyu
+
+
+Add a label to a filesystem:
+:> sudo e2label /dev/nvme0n1p4 "my_arch"
+View existing labels:
+:> ls -l /dev/disk/by-label
+
+
+View kernel parameters you booted with:
+:> cat /proc/cmdline
