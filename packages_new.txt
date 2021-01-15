@@ -36,11 +36,15 @@ Antigen
 [pac] unzip
 [pac] zathura zathura-pdf-mupdf zathura-djvu
 [pac] acpi
+[pac] zip
 [pac] tlp
 sudo systemctl enable tlp.service
 
 
 ? [aur] qemu
+
+================ Latex
+[pac] texlive-most texlive-lang texmaker
 
 ================ Android
 ? [pac] android-file-transfer

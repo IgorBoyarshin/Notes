@@ -174,7 +174,7 @@ To fix not working after boot from suspend:
 * For ifconfig
 
 # [pac] pinta
-* Simple image editor
+* Simple image editor (paint)
 
 ? [pac] glade
 * GTK gui builder
@@ -473,6 +473,9 @@ To fix not working after boot from suspend:
 * Disassembler and debugger, similar to OllyDbg
 
 ? [aur] st
+
+? [aur] audio-recorder
+Simple audio (microphone) recorder
 
 ? [aur] sublime-text2
 

@@ -657,6 +657,7 @@ Connect to Amazon AWS via ssh
 
 
 Audio, Alsa, Pavucontrol, Pactl
+Playback (play back) microphone in real time
 Real-time echo test:
 :> pactl load-module module-loopback
 :> pactl unload-module module-loopback
