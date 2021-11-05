@@ -1,0 +1,27 @@
+:> sudo rfkill unblock all
+:> sudo ip link set wlp2s0 up
+
+Now
+:> sudo iw wlp2s0 scan
+works.
+
+:> sudo systemctl start dhcpcd.service
+
+Connect to WPA network
+:> sudo -s
+:> wpa_passphrase NETWORK_NAME >> /etc/wpa_supplicant.conf
+[[ type password here, confirm with Enter]]
+ 
+ Check with
+ :> cat /etc/wpa_supplicant.conf 
+
+Connect
+:> sudo wpa_supplicant -B -D wext -i wlp2s0 -c /etc/wpa_supplicant.conf
+
+
+Optionally:
+:> sudo dhclient wlp2s0
+
+
+Connect to network without password:
+:> sudo iw dev wlp2s0 connect AndroidIgorek

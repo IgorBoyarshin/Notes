@@ -79,3 +79,12 @@ On backend:
 ==================================== Domain name, DNS ==========================
 ================================================================================
 my.freenom.com
+================================================================================
+======================= Arch, Apache, SVN, SSL, certbot ========================
+================================================================================
+Enable virtual host on 80
+Run
+:> sudo certbot --apache
+Do NOT include in httpd.conf file httpd-ssl.conf,
+but DO enable ssl modules.
+The geenrated by certbot ssl file is included at the end of httpd.conf, where 443 is listened to.

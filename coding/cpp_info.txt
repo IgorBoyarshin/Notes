@@ -129,3 +129,8 @@ Base class |                |                   |
 Public     |     public     |     protected     |     private
 Protected  |    protected   |     protected     |     private
 Private    |  not inherited |   not inherited   |   not inherited
+// ----------------------------------------------------------------------------
+// ---------------- Assembly generation
+// ----------------------------------------------------------------------------
+(even with -O3)
+COMPILATION_FLAGS += -g -masm=intel -fverbose-asm -S

@@ -26,3 +26,11 @@ View connections
 
 Kill TCP connection
 :> ss -K dst 192.168.1.214 dport = 49029
+
+
+Connect raspberry via Ethernet cable to PC
+On raspberry, in /etc/dhcpcd.conf
+{
+    interface eth0
+    static ip_address = 10.0.0.10
+}

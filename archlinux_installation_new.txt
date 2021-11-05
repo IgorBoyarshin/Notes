@@ -24,6 +24,7 @@ dhcpcd service
 - Root ~~, Type=...
 ======== Common
 m === help
+a === set bootable flag
 p === print partition table
 n === add new partition
 l === list partition types
@@ -86,20 +87,13 @@ BIOS:
 
 :> grub-install --target=x86_64-efi --bootloader-id=arch_grub_uefi --efi-directory=/boot --recheck
 :> os-prober
+:> mkinitcpio -p linux
 :> grub-mkconfig -o /boot/grub/grub.cfg
 ======== BIOS, MBR
 :> grub-install --target=i386-pc --recheck /dev/sda
 :> os-prober
-:> grub-mkconfig -o /boot/grub/grub.cfg
-================ Other
 :> mkinitcpio -p linux
-
-TODO
-TODO: run mkinitcpio before or after grub-mkconfig??
-!!!!!!!!!!! grub-mkconfig must be run after image creation !!!!!!!!!!!!!!!!!
-TODO
-TODO
-
+:> grub-mkconfig -o /boot/grub/grub.cfg
 ======== Set root password
 :> passwd
 

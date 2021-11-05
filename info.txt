@@ -325,7 +325,7 @@ Get cumulative size of a dir
 
 
 To temporarily give more space for /tmp folder
-:> sudo mount -o remount,size=4G,noatime /tmp
+:> sudo mount -o remount,size=16G,noatime /tmp
 
 
 Get info about opened ports, listeting services etc
@@ -624,6 +624,18 @@ Cut video with ffmpeg
 (-t for duration. Timestamps are either in seconds (sec.ms) or full)
 :> ffmpeg -ss 01:38:09.0 -i input.mp4 -c copy -t 65 out.mkv
 
+Concatenate video (merge) with ffmpeg (for formats that do not support file-level concatenation, like mp4):
+:> cat mylist.txt
+file '/path/to/file1'
+file '/path/to/file2'
+file '/path/to/file3'
+:> ffmpeg -f concat -safe 0 -i mylist.txt -c copy output.mp4
+
+
+Reduce file size.
+"slow" to find more encoding options and better reduce the size.
+:> ffmpeg -i input.mp4 -vf scale=1280:720 -preset slow -crf 18 output.mp4
+
 
 For loop:
 :> for subt in *.srt; do mv $subt "._$subt"; done
@@ -854,3 +866,49 @@ View existing labels:
 
 View kernel parameters you booted with:
 :> cat /proc/cmdline
+
+
+Reduce video size with ffmpeg (hevc, h.265):
+:> ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4
+
+
+Convert any file (binary, picture, ..) into header-file
+:> xxd -i file.jpg > file.h
+
+
+Print (get) return status of last command
+:> echo $?
+
+
+To fix cyrillic (russian) text in wine
+:> LANG=ru_RU.UTF-8 wine <command>
+
+
+Arduino, Java, JWM not resizing, options closing
+Append
+export _JAVA_AWT_WM_NONREPARENTING=1
+to
+/etc/profile.d/jre.sh
+Then source the file in the terminal where you open the "arduino" command
+
+
+To turn off WIFI:
+:> nmcli radio wifi off
+
+
+MPV to playback large (high quality) videos on Intel GPU:
+Add "vo=xv" to mpv.conf
+
+
+Problems with keyring and PGP keys during pacman update
+:> sudo pacman -S archlinux-keyring && sudo pacman -Syu
+
+
+Android Studio Vim plugin settings stored in: ~/.ideavimrc
+
+
+Pacman failed to commit transaction, conflict
+(https://wiki.archlinux.org/title/pacman#.22Failed_to_commit_transaction_.28conflicting_files.29.22_error)
+1) check what package (if any) owns the files in question:
+:> pacman -Qo <file>
+2) If owned => too bad... Unowned => preserve by moving, commit the installation, safely remove if all goes well

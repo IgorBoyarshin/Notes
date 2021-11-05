@@ -266,3 +266,9 @@ auto make_array(T&&...t) {
 // XXX: 4 can be >= 3, because the size of an initializer-list can be <= than
 // the size of the container
 std::array<int, 4> arr = make_array(1, 2, 3);
+// ----------------------------------------------------------------------------
+// --------------- new, delete alignment
+// ----------------------------------------------------------------------------
+// 32-byte alignment:
+float* arr = new (std::align_val_t(32)) float[count];
+::operator delete[] (arr, std::align_val_t(32));
