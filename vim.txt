@@ -1,3 +1,9 @@
+[I -- show lines with this word
+"_dd -- black hole register
+"0p -- paste from the previous buffer
+Ctrl"a -- insert from register a
+
+
 While searching, add:
 \c === to ignore case
 \C === make case sensitive

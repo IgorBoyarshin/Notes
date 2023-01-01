@@ -145,6 +145,10 @@ To fix not working after boot from suspend:
 
 # [pac] unzip
 
+# [pac] hwloc
+* View memory topology
+* lstopo
+
 # [pac] python-pip
 
 # [pac] tk

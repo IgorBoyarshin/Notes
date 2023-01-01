@@ -1,0 +1,22 @@
+Somebody can then run svn log -r 9238 to read about the exact changeset that fixed the bug, and run svn diff -c 9238 to see the patch itself. 
+
+pwd = ~/my_calc_branch
+svn merge ^/calc/trunk
+
+Revert some previous change (--revision 392:391, or by an equivalent --change -392)
+svn merge ^/calc/trunk . -c-392
+
+Resurrect a file with history
+:> svn copy ^/calc/trunk/src/real.c@399 ./real.c
+Without history:
+:> svn cat ^/calc/trunk/src/real.c@399 > ./real.c
+:> svn add real.c
+Purely remotely:
+:> svn copy ^/calc/trunk/src/real.c@399 ^/calc/trunk/src/real.c -m "Resurrect real.c from revision 399."
+
+To move local changes to a new branch
+
+:> svn copy http://svn.example.com/repos/calc/trunk \
+           http://svn.example.com/repos/calc/branches/newbranch \
+           -m "Create branch 'newbranch'."
+:> svn switch ^/calc/branches/newbranch

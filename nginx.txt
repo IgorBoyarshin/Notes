@@ -1,0 +1,62 @@
+server {
+	server_name polaricsemi.com www.polaricsemi.com;
+
+	location / {
+		try_files $uri $uri/ @proxy;
+		proxy_pass http://localhost:8080;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+		proxy_set_header Host $host;
+		proxy_cache_bypass $http_upgrade;
+	}
+
+	location @proxy {
+		proxy_pass http://localhost:8080;
+	}
+
+	listen [::]:443 ssl ipv6only=on; # managed by Certbot
+		listen 443 ssl; # managed by Certbot
+		ssl_certificate /etc/letsencrypt/live/polaricsemi.com/fullchain.pem; # managed by Certbot
+		ssl_certificate_key /etc/letsencrypt/live/polaricsemi.com/privkey.pem; # managed by Certbot
+		include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+		ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}
+
+server {
+	server_name polaricsemi.com www.polaricsemi.com;
+
+	location / {
+		try_files $uri $uri/ @proxy2;
+		proxy_pass http://localhost:3000;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+		proxy_set_header Host $host;
+		proxy_cache_bypass $http_upgrade;
+	}
+
+	location @proxy2 {
+		proxy_pass http://localhost:3000;
+	}
+
+	listen [::]:4000 ssl ipv6only=on; # managed by Certbot
+		listen 4000 ssl; # managed by Certbot
+		ssl_certificate /etc/letsencrypt/live/polaricsemi.com/fullchain.pem; # managed by Certbot
+		ssl_certificate_key /etc/letsencrypt/live/polaricsemi.com/privkey.pem; # managed by Certbot
+		include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+		ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}
+
+server {
+	if ($host = www.polaricsemi.com) {
+		return 301 https://$host$request_uri;
+	} # managed by Certbot
+	if ($host = polaricsemi.com) {
+		return 301 https://$host$request_uri;
+	} # managed by Certbot
+	listen 80;
+	listen [::]:80;
+	server_name polaricsemi.com www.polaricsemi.com;
+	return 404; # managed by Certbot
+}

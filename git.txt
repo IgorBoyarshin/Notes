@@ -50,7 +50,13 @@ git d HEAD^ HEAD
 Using meld:
 git difftool --dir-diff old..new
 -------------------------------------------------------------------------------
+To make a global hook configuration:
+:> git config --global init.templatedir '~/.git-templates'
+:> mkdir -p ~/.git-templates/hooks
+
+
 nocheckin pre-commit hook
+[.git-templates/hooks/pre-commit] ???
 [.git/hooks/pre-commit]
 {
 #!/bin/sh

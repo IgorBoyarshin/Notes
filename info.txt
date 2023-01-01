@@ -823,10 +823,6 @@ esac
 }
 
 
-German Uni
-patrik.stoer@fau.de
-
-
 To fix coloring (and maybe environmental variables) in console(terminal)
 :> tput reset
 
@@ -912,3 +908,40 @@ Pacman failed to commit transaction, conflict
 1) check what package (if any) owns the files in question:
 :> pacman -Qo <file>
 2) If owned => too bad... Unowned => preserve by moving, commit the installation, safely remove if all goes well
+
+
+Clear pacman cache
+:> sudo pacman -S pacman-contrib
+Will leave only 1 last version:
+:> paccache -rk1
+
+
+Chinese/Japanese/Korean hieroglyphs font:
+:> instp noto-fonts-cjk
+
+
+Sort files in a directory by size:
+:> du -sh * | sort -h
+
+
+Disable particular scancode
+(https://wiki.archlinux.org/title/map_scancodes_to_keycodes)
+1) Temporary
+:> sudo setkeycodes SCANCODE_HEX KEYCODE_DEC
+To disable PageUp:
+:> sudo setkeycodes c9 0
+To find out what scancode you press and list keycodes:
+(run without arg to list all devices)
+:> instp evtest
+:> sudo evtest /dev/input/event4
+2) Permanently [another advantage: blocks only on particular keyboard]
+Create /etc/udev/hwdb.d/10-my-modifiers.hwdb {
+# Use "reserved" or "unknown"
+evdev:atkbd:dmi:bvn*:bvr*:bd*:br*:svnDellInc.:pnInspiron7577:pvr* # my keyboard
+ KEYBOARD_KEY_c9=reserved
+}
+(find out dmi match string from :> sudo evemu-describe (:> instp evemu))
+Update db:
+:> sudo systemd-hwdb update
+Reload db without reboot:
+:> sudo udevadm trigger

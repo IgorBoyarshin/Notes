@@ -272,3 +272,51 @@ std::array<int, 4> arr = make_array(1, 2, 3);
 // 32-byte alignment:
 float* arr = new (std::align_val_t(32)) float[count];
 ::operator delete[] (arr, std::align_val_t(32));
+// ----------------------------------------------------------------------------
+// --------------- Vector
+// ----------------------------------------------------------------------------
+typedef union vec2_u {
+    float elements;
+    struct {
+        union {
+            float x, r;
+        };
+        union {
+            float y, b;
+        };
+    };
+} vec2;
+// ----------------------------------------------------------------------------
+// --------------- Tricks
+// ----------------------------------------------------------------------------
+std::unordered_map<std::string, int> m;
+const std::string key = "";
+for (1000) m.emplace(key, 0); // will "new" the node on the heap, realize m already has it, and "delete" the node
+// Fix:
+const std::pair<const std::string, int> p = {};
+for (1000) m.insert(p);
+// ----------------------------------------------------------------------------
+std::unordered_map<std::string, int> m;
+std::pair<const std::string, int> p = {};
+for (1000) m.insert(p);
+// Because the p is not const, the insert overload with && will take precedence over
+// the one with const&, and so a copy of p will be made.
+// Fix:
+const std::pair<const std::string, int> p = {};
+// ----------------------------------------------------------------------------
+// --------------- move
+// ----------------------------------------------------------------------------
+template<typename T>
+class Cont {
+    public:
+        std::vector<T> vals;
+
+    std::vector<T> getValues() && {
+        return std::move(vals);
+    }
+    const std::vector<T>& getValues() const& {
+        return vals;
+    }
+}
+
+auto vals = std::move(txt).getValues();
